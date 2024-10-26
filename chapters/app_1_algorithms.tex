@@ -1,0 +1,71 @@
+\chapter{Algorithms}
+
+\begin{algorithm}
+\caption{Base DQN algorithm}
+\label{alg:dqn1}
+\begin{algorithmic}
+    \ENSURE $Q_\theta \approx q_*$
+    \STATE
+
+    \STATE \textbf{Initialization:}
+    \STATE Initialize $Q_\theta(s,a)$ with random weights $\theta$
+    \STATE
+    
+    \FOR{each episode}
+        \FOR{each step}
+            \STATE Select an action $a$ for the current state $s$ following an greedy policy based on $Q_\theta(s,a)$
+            \STATE Perform action $a$ and obtain the vector $(s,a,r,s^\prime)$
+            \IF{episode ended}
+                \STATE Set target value $y \gets r$
+            \ELSE
+                \STATE Set target value $y \gets r + \gamma \max_{a^\prime \in \mathcal{A}} Q_\theta(s^\prime,a^\prime)$
+            \ENDIF
+            \STATE Calculate the loss $\mathcal{L} = [Q_\theta(s,a)-y]^2$
+            \STATE Update $Q_\theta$ with backpropagation and gradient descent minimizing the loss
+        \ENDFOR
+    \ENDFOR
+    \STATE
+    
+    \RETURN $Q_\theta$
+\end{algorithmic}
+\end{algorithm}
+
+
+\begin{algorithm}
+\caption{Final DQN algorithm}
+\label{alg:dqn2}
+\begin{algorithmic}
+    \REQUIRE $N, J$
+    \ENSURE $Q_\theta \approx q_*$
+    \STATE
+
+    \STATE \textbf{Initialization:}
+    \STATE Initialize $Q_\theta(s,a)$ with random weights $\theta$
+    \STATE Initialize $\hat{Q}_{\theta^-}(s,a)$ with weights $\theta^- = \theta$
+    \STATE Initialize replay buffer $D$
+    \STATE Initialize replay buffer $\epsilon$
+    \STATE
+    
+    \FOR{each episode}
+        \FOR{each step}
+            \STATE Select an action $a$ for the current state $s$ following an $\epsilon$-greedy policy based on $Q_\theta(s,a)$
+            \STATE Perform action $a$ and store the vector $(s,a,r,s^\prime)$ in the replay buffer $D$
+            \STATE Select a random subset $(s_j,a_j,r_j,s^\prime_j)$ of $J$ experiences from the replay buffer $D$
+            \FOR{each transition $j$}
+                \IF{episode ended}
+                    \STATE Set target value $y_j \gets r_j$
+                \ELSE
+                    \STATE Set target value $y_j \gets r_j + \gamma \max_{a^\prime_j \in \mathcal{A}} \hat{Q}_{\theta^-}(s^\prime_j,a^\prime_j)$
+                \ENDIF
+            \ENDFOR
+            \STATE Calculate the loss $\mathcal{L} \gets \frac{1}{J} \sum^{J-1}_{j=0} [Q_\theta(s_j,a_j) - y_j]^2$
+            \STATE Update $Q_\theta$ with backpropagation and gradient descent minimizing the loss
+            \STATE Every $N$ iterations, clone the weights from $Q_\theta$ to $\hat{Q}_{\theta^-}$: $\theta^- \gets \theta$
+            \STATE Decrement $\epsilon$
+        \ENDFOR
+    \ENDFOR
+    \STATE
+
+    \RETURN $Q_\theta$
+\end{algorithmic}
+\end{algorithm}

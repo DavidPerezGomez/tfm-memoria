@@ -1,0 +1,35 @@
+% general settings
+\hypersetup{
+linktocpage=true,
+colorlinks=true,
+linkcolor=blue,
+citecolor=blue,
+}
+\definecolor{Hgray}{gray}{0.6}
+
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\setlength{\topmargin}{0cm}
+\setlength{\textheight}{23cm}
+\setlength{\textwidth}{17cm}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\headheight}{1cm}
+
+% indicates that 'sub-sub-sections' are numbered and appear in the index
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+% settings for code
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+\renewcommand\thesection{\thechapter.\arabic{section}}
+
+% subsubsubsection
+% \renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+% % display heading, like subsubsection
+%                                      {-3.25ex\@plus -1ex \@minus -.2ex}%
+%                                      {1.5ex \@plus .2ex}%
+%                                      {\normalfont\normalsize\bfseries}}
