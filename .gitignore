@@ -1,0 +1,16 @@
+.vscode/
+*.pdf
+*.out
+*.aux
+*.bbl
+*.bcf
+*latexmk
+*.fls
+*.lof
+*.log
+*.log
+*.xml
+*.gz
+*.toc
+*.docx
+.DS_Store
