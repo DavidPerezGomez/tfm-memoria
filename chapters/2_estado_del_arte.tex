@@ -29,7 +29,7 @@ The environment encompasses all that is external to the agent. The agent learns 
 \begin{enumerate}
     \item receives and observation of the environment $O_t$,
     \item receives a reward $R_t$ based on the current state of the environment, and
-    \item executed an action $A_t$.
+    \item executes an action $A_t$.
 \end{enumerate}
 
 In response, the environment:
@@ -68,7 +68,6 @@ The return can also be expressed recursively:
 \end{split}
 \end{align}
 
-
 \subsubsection{Agent}
 
 Three elements:
@@ -88,7 +87,7 @@ The policy $\pi(\cdot)$ is a function that determines the action that the agent 
     \begin{equation}
         a = \pi(s)
     \end{equation}
-    \item \textbf{Stochastic:} The policy assigns one or more actions following a probability distributions to each state. In this case, the policy $\pi(a|s)$ represents the probability that action $a$ will be taken when in the state $s$.
+    \item \textbf{Stochastic:} The policy assigns one or more actions following a probability distribution to each state. In this case, the policy $\pi(a|s)$ represents the probability that action $a$ will be taken when in the state $s$.
     \begin{equation}
         \pi(a|s) = P(A_t=a|S_t=s)
     \end{equation}
