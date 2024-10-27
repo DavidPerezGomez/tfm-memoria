@@ -141,19 +141,22 @@ The model is internal representation of the environment that the agent uses to t
 A reinforcement learning problem can be described as a Markov decision process \cite{unk}, which is defined by the tuple $<\mathcal{S}, \mathcal{A},\mathcal{P},\mathcal{R},\gamma>$.
 
 \begin{description}
-    \item[$\mathcal{S}$] is the finite set of all possible states in the environment ($S_t \in \mathcal{S}$). These states follow the Markov property, which means that for any state, the future states are independent of the past states \cite[unk]. Its elements can be of one of two forms, depending on whether or not the reward for the transition is deterministic.
+    \item[$\mathcal{S}$] is the finite set of all possible states in the environment ($S_t \in \mathcal{S}$). These states follow the Markov property (equation \ref{eq:markov}), which means that the evolution of a state depends only on that state, and is independent of all the previous ones.
     \begin{equation}
+    \label{eq:markov}
         P(S_{t+1}|S_t) = P(S_{t+1}|S_1, S_2, \ldots, S_t)
     \end{equation}
-    \item[$\mathcal{A}$] is the finite set of all possible actions that the agent can take ($A_t \in \mathcal{A}$). 
-    \item[$\mathcal{P}$] is the state transition matrix, which contains the probabilities for all the transition from a state $S_t=s$ to the next state $S_{t+1}=s^\prime$.
+    \item[$\mathcal{A}$] is the finite set of all possible actions that the agent can take ($A_t \in \mathcal{A}$).
+    \item[$\mathcal{R}$] is the finite set of all possible rewards ($R_t \in \mathcal{R}$). 
+    \item[$\mathcal{P}$] is the state transition matrix, which contains the probabilities for all the transition from a state $S_t=s$ to the next state $S_{t+1}=s^\prime$. Its elements can be of one of two forms, depending on whether the reward for the transition is deterministic (equation \ref{eq:transition_det}) or stochastic (equation \ref{eq:transition_sto}).
     \begin{equation}
-        p(s^\prime, r|s, a) = P(S_{t+1} = s^\prime, R_{t+1} = r|S_t = s, A_t = a)
-    \end{equation}
-    \begin{equation}
+    \label{eq:transition_det}
         p(s^\prime|s, a) = P(S_{t+1} = s^\prime|S_t = s, A_t = a)
     \end{equation}
-    \item[$\mathcal{R}$] is the finite set of all possible rewards ($R_t \in \mathcal{R}$). 
+    \begin{equation}
+    \label{eq:transition_sto}
+        p(s^\prime, r|s, a) = P(S_{t+1} = s^\prime, R_{t+1} = r|S_t = s, A_t = a)
+    \end{equation}
     \item[$\gamma$] is the discount value applied to the rewards when calculating the return.
 \end{description}
 
