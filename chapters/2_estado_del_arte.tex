@@ -45,17 +45,17 @@ In response, the environment:
 
 \subsubsection{States}
 
-The states describe the evolution of the environment to reflect the actions taken by the agent. On any time step $t$, the state $S_t$ contains the information of all previous observations, actions and rewards, and can be used to determine how the environment will change in the next time step. Depending on the design of the environment and the agent, the agent may not have perfect knowledge of the sate, meaning that the observation $O_t$ it receives does not equal the true state $S_t$. These environments are called partially observable, as opposed to fully observable environments, in which $O_t = S_t$.
+The states describe the evolution of the environment to reflect the actions taken by the agent. For every time step $t$, the state $S_t$ contains the information of all previous observations, actions and rewards, and can be used to determine how the environment will change in the next time step. Depending on the design of the environment and the agent, the agent may not have perfect knowledge of the sate, meaning that the observation $O_t$ it receives does not equal the true state $S_t$. These environments are called partially observable, as opposed to fully observable environments, in which $O_t = S_t$.
 
 \subsubsection{Reward signal}
 
-The reward signal $R_t$ is a real scalar value that the agent receives on time step $t$, after every action it takes. On any given time step, the sum of all future rewards is a random variable $G_t$ known as \textit{return}. The \textit{reward hypothesis} sates that the solution to any problem can be thought as the maximization of the expected value of the return \cite{Sutton:2014}. As such, the agent's goal is to learn actions that maximize the return at the end of the scenario, which doesn't necessarily mean maximizing the immediate reward for the current state.
+The reward signal $R_t$ is a real scalar value that the agent receives after every action it takes. On any given time step $t$, the sum of all future rewards is a random variable $G_t$ known as \textit{return}. The \textit{reward hypothesis} sates that the solution to any problem can be thought as the maximization of the expected value of the return \cite{Sutton:2014}. As such, the agent's goal is to learn actions that maximize the return at the end of the scenario, which doesn't necessarily mean maximizing the immediate reward for the current state. Sometimes it may be necessary to forgo a large immediate reward in favour of greater long-term return.
 
 \begin{equation}
     G_t = R_{t+1} + R_{t+2} + R_{t+3} + \ldots
 \end{equation}
 
-Depending on the nature of the environment, it may be the case that the number of steps isn't finite. This could mean that the return never converges. To solve this, a discount value $\gamma \in [0,1]$ is introduced, which reduces the weight of reward the further away they are from the current time step.
+Depending on the nature of the environment, it may be the case that the number of steps isn't finite. This could mean that the return never converges. To solve this, a discount value $\gamma \in [0,1]$ is introduced, which reduces the weight of rewards the further away they are from the current time step.
 
 \begin{equation}
     G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \ldots
@@ -115,7 +115,7 @@ The value function calculates the accumulated future reward (the return) of a st
 
 \subsubsection*{Model}
 
-The model is internal representation of the environment that the agent uses to try to predict how it will behave. It is an optional element, and agents may or may not have internal models. These models can be of two types:
+The model is an internal representation of the environment that the agent uses to try to predict how it will behave. It is an optional element, and agents may or may not have internal models. These models can be of two types:
 
 \begin{itemize}
     \item \textbf{Transition model $\mathcal{P}$:} It estimates, given the current state $s$ and the action to take $a$, the next state $s^\prime$ that the environment will generate.
@@ -137,6 +137,8 @@ Next, we introduce some of the common challenges that are found in RL.
 
 There are two main configuration of sequential decision-making problems. The first is reinforcement learning in the strict sense, where the environment is unknown to the agent, which must interact with it and improve its policy by trial and error. In the second, planning, the agent starts with a perfect model of the environment and uses it to calculate improvements to the policy.
 
+These approaches a usually separated, but they may sometimes be related, for example in problems where reinforcement learning is used to create a model of the environment which is then used in planning.
+
 \subsubsection*{Exploration and exploitation}
 
 Exploration is the process by which the agent finds new paths or alternative courses of action that allow it to discover better solutions. Exploitation is the process of using the best known solutions to maximize the reward. As such, there is a balance to be found between the two, since both are necessary to solve the problem: the agent should work on optimizing the most promising solutions, but also keep exploring alternatives.
@@ -156,14 +158,14 @@ The optimal policy is the one that results in the maximum value function. Typica
 A reinforcement learning problem can be described as a Markov decision process \cite{Sutton:2014}, which is defined by the tuple $<\mathcal{S}, \mathcal{A},\mathcal{P},\mathcal{R},\gamma>$.
 
 \begin{description}
-    \item[$\mathcal{S}$] is the finite set of all possible states in the environment ($S_t \in \mathcal{S}$). These states follow the Markov property (equation \ref{eq:markov}), which means that the evolution of a state depends only on that state, and is independent of all the previous ones \cite{Sutton:2014}.
+    \item[$\mathcal{S}$] is the finite set of all possible states in the environment ($S_t \in \mathcal{S}$). These states follow the \textit{Markov property} (equation \ref{eq:markov}), which means that the evolution of a state depends only on that state, and is independent of all the previous ones \cite{Sutton:2014}.
     \begin{equation}
     \label{eq:markov}
         P(S_{t+1}|S_t) = P(S_{t+1}|S_1, S_2, \ldots, S_t)
     \end{equation}
     \item[$\mathcal{A}$] is the finite set of all possible actions that the agent can take ($A_t \in \mathcal{A}$).
     \item[$\mathcal{R}$] is the finite set of all possible rewards ($R_t \in \mathcal{R}$). 
-    \item[$\mathcal{P}$] is the state transition matrix, which contains the probabilities for all the transition from a state $S_t=s$ to the next state $S_{t+1}=s^\prime$. Its elements can be of one of two forms, depending on whether the reward for the transition is deterministic (equation \ref{eq:transition_det}) or stochastic (equation \ref{eq:transition_sto}).
+    \item[$\mathcal{P}$] is the state transition matrix, which contains the probabilities for all the transition from a state $s$ to the next state $s^\prime$. Its elements can be of one of two forms, depending on whether the reward for the transition is deterministic (equation \ref{eq:transition_det}) or stochastic (equation \ref{eq:transition_sto}).
     \begin{equation}
     \label{eq:transition_det}
         p(s^\prime|s, a) = P(S_{t+1} = s^\prime|S_t = s, A_t = a)
@@ -233,23 +235,25 @@ The solution for the optimal value functions can be obtained by maximizing the a
 
 \subsection{Q-Learning}
 
-A common control algorithm for approximating the optimal action value function is the so-called Q-Learning \cite{Watkins:1992}. This algorithm estimates $q_\ast$ via a function $Q(s,a)$. The agent interacts with the environment following a greedy policy based on the current value of $Q$: $\pi_\textrm{greedy}(s) = \max_a Q(s,a)$. On every step $t$, the value of $Q$ is updated with the following formula, where the step constant $\alpha \in [0,1)$ determines the magnitude of each update:
+Q-Learning \cite{Watkins:1992} is a common control algorithm for approximating the optimal action value function. This algorithm estimates $q_\ast$ via a function $Q(s,a)$. The agent interacts with the environment following a greedy policy based on the current value of $Q$: $\pi_\textrm{greedy}(s) = \max_a Q(s,a)$. On every step $t$, the value of $Q$ is updated with the following formula, where the step constant $\alpha \in [0,1)$ determines the magnitude of each update:
 
 \begin{equation}
     Q(S_t,A_t) = Q(S_t,A_t) + \alpha[R_{t+1} + \gamma \max_a Q(S_{t+1},a) - Q(S_t,A_t)]
 \end{equation}
 
-In this formula, the term $R_{t+1} + \gamma \max_a Q(S_{t+1},a) - Q(S_t,A_t)$ is called the temporal difference error (TD error, $\delta_t$) and represents the difference between the current estimation of $Q(S_t,A_t)$ and the new estimation after step $t$.
+In this formula, the term $R_{t+1} + \gamma \max_a Q(S_{t+1},a) - Q(S_t,A_t)$ is called the \textit{temporal difference error} (TD error, $\delta_t$) and represents the difference between the current estimation of $Q(S_t,A_t)$ and the new estimation after step $t$.
 
 \subsection{Deep Q-Learning}
 
-A problem of the Q-Learning algorithm is that the estimator function $Q$ acts as a table that holds the estimated value of $q_\ast$ for every combination of state and action, meaning that, for an environment with $m$ possible states and $n$ actions, the size of the table would be $m \times n$. For environments with a large number of possible states, such as those where the state is determined by one or more discreet values, it quickly becomes unfeasible to store a value for each combination, both in terms of memory space and computing power.
+A problem of the Q-Learning algorithm is that the estimator function $Q$ acts as a table that holds the approximated value of $q_\ast$ for every combination of state and action, meaning that, for an environment with $m$ possible states and $n$ actions, the size of the table would be $m \times n$. 
 
-One way to tackle this issue is to use an artificial neural network as a non-linear estimator for the value function. This combination of deep learning and reinforcement learning is called deep reinforcement learning (DRL). When this strategy is applied to the Q-Learning algorithm it is known as deep Q-Learning (DQN) \cite{Mnih:2013}. In this new algorithm (shown in algorithm \ref{alg:dqn1}), a neural network $Q_\theta$ with randomly initialized weights $\theta$ is used to approximate the value function. The agent takes actions following a greedy policy $\pi_\textrm{greedy}(s) = \max_a Q_\theta(s,a)$ and after every step a target value is calculated. This target value represents the new estimation of the value function for the action taken $Q_\theta(S_t, A_t)$. This value and the difference to the current inference estimation are used to calculate the loss that will be used to update the network via gradient descent and backpropagation.
+The \textit{curse of dimensionality} is a known problem caused by the fact that the number of states in an environment grows exponentially with the number of variables. For environments with a large number of possible states, such as those where the state is determined by one or more discreet values, it quickly becomes unfeasible to store a value for each combination, both in terms of memory space and computing power.
+
+One way to tackle this issue is to use an artificial neural network as a non-linear estimator for the value function. This combination of deep learning and reinforcement learning is called \textit{deep reinforcement learning} (DRL). When this strategy is applied to the Q-Learning algorithm it is known as \textit{deep Q-Learning} (DQN) \cite{Mnih:2013}. In this new algorithm (shown in algorithm \ref{alg:dqn1}), a neural network $Q_\theta$ with randomly initialized weights $\theta$ is used to approximate the value function. The agent takes actions following a greedy policy $\pi_\textrm{greedy}(s) = \max_a Q_\theta(s,a)$ and after every step a target value is calculated. This target value represents the new estimation of the value function for the action taken $Q_\theta(S_t, A_t)$. This value and the difference to the current inference estimation are used to calculate the loss that will be used to update the network via gradient descent and backpropagation.
 
 \subsubsection*{$\epsilon$-greedy method}
 
-Although powerful, Deep Q-Learning is still subject to the common challenges of reinforcement learning, such as the problem of exploration vs exploitation described in section \ref{sec:challenges}. The $\epsilon$-greedy method consists in using a probability parameter $\epsilon \in [0,1]$ to control how frequently the agent explores the environment by taking random actions versus exploiting it by following the learned policy. $\epsilon$ begins with value equal or close to $1$ and decreases as the training progresses. This allows the agent to take mostly random actions at the beginning, when it has little to no knowledge of the environment, and take actions based on what it has learned later on.
+Although powerful, deep Q-Learning is still subject to the common challenges of reinforcement learning, such as the problem of exploration vs exploitation described in section \ref{sec:challenges}. The $\epsilon$-greedy method consists in using a probability parameter $\epsilon \in [0,1]$ to control how frequently the agent explores the environment by taking random actions versus exploiting it by following the learned policy. $\epsilon$ begins with value equal or close to $1$ and decreases as the training progresses. This allows the agent to take mostly random actions at the beginning, when it has little to no knowledge of the environment, and take actions based on what it has learned later on.
 
 The equation \ref{eq:eps} describes an $\epsilon$-greedy policy.
 
@@ -270,7 +274,7 @@ A technique to solve this issue is known as the experience replay buffer. It con
 
 \subsubsection*{Target network}
 
-Another problem in DQL is that the target value of the network is constantly changing, since it depends on the network itself, witch get updated every step. This causes a great deal of instability during training, and makes it harder for the network to converge. To avoid this problem, a second neural network $\hat{Q}_{\theta^-}$ with the same structure as the prediction network $Q_\theta$ is introduced. This network, called the target network, becomes the one used to calculate the target value that is then used to obtain the loss. The target network is originally identical to the main network (has the same weights), but it is not updated on every step like the main one. Instead, after a certain number $N$ of steps, the target network is synchronized with the prediction network by simply cloning its weights. This means that for $N$ iterations, the target $\hat{Q}_{\theta^-}(s^\prime, a^\prime)$ will not be affected by the change to the prediction network $Q_\theta$, which results in more stability during training.
+Another problem in DQL is that the target value of the network is constantly changing, since it depends on the network itself, witch gets updated every step. This causes a great deal of instability during training, and makes it harder for the network to converge. To avoid this problem, a second neural network $\hat{Q}_{\theta^-}$ with the same structure as the prediction network $Q_\theta$ is introduced. This network, called the \textit{target network}, becomes the one used to calculate the target value that is then used to obtain the loss. The target network is originally identical to the main network (has the same weights), but it is not updated on every step like the main one. Instead, after a certain number $N$ of steps, the target network is synchronized with the prediction network by simply cloning its weights. This means that for $N$ iterations, the target $\hat{Q}_{\theta^-}(s^\prime, a^\prime)$ will not be affected by the change to the prediction network $Q_\theta$, which results in more stability during training.
 
 \subsubsection*{Final DQN algorithm}
 
@@ -280,4 +284,4 @@ Algorithm \ref{alg:dqn2} shows what Deep Q-Learning looks like after the aforeme
 
 Hierarchical reinforcement learning (HRL) is the strategy of dividing the main problem into several sub-problems, which are then learned by a hierarchy of agents trained by reinforcement learning \cite{Barto:2003, Al-Emran:2015, Pateria:2021}. This hierarchy typically sees a number of low-level agents learn only one specific subtask, but these agents don't choose when they get to act. Instead, a higher-level agent decides what subtask to pursue at any given point, essentially using its actions to select which lower-level agent gets to interact with the environment. Depending on the complexity of the problem, this hierarchy may have an arbitrary number of abstraction layers.
 
-By tackling several subtasks with reduced complexity, HRL helps mitigate the \say{curse of dimensionality}. Additionally the use of independent agents brings the additional benefit of greater modularity and reusability of the solutions \cite{Al-Emran:2015}.
+By tackling several subtasks with reduced complexity, HRL helps mitigate the curse of dimensionality. Additionally the use of independent agents brings the additional benefit of greater modularity and reusability of the solutions \cite{Al-Emran:2015}.
