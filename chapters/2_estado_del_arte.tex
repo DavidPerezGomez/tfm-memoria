@@ -3,7 +3,7 @@
 
 \section{Introduction to reinforcement learning}
 
-Reinforcement learning is a form of machine learning that can be described as \say{a way of programming agents by reward and punishment without needing to specify how the task is to be achieved} \cite{Kaelbling:1996}. The goal of reinforcement learning is to produce and agent capable of solving a particular problem within an environment. However, the agent has no initial knowledge of the task that it must complete or the effect that its actions have. Instead, it must learn through trial and error by interacting with the environment.
+Reinforcement learning (RL) is a form of machine learning that can be described as \say{a way of programming agents by reward and punishment without needing to specify how the task is to be achieved} \cite{Kaelbling:1996}. The goal of reinforcement learning is to produce and agent capable of solving a particular problem within an environment. However, the agent has no initial knowledge of the task that it must complete or the effect that its actions have. Instead, it must learn through trial and error by interacting with the environment.
 
 \subsection{Elements}
 
@@ -129,10 +129,28 @@ The model is internal representation of the environment that the agent uses to t
     \end{equation}
 \end{itemize}
 
-\subsection{Taxonomy of agents}
-
 \subsection{Challenges in reinforcement learning}
 \label{sec:challenges}
+
+Next, we introduce some of the common challenges that are found in RL.
+
+\subsubsection*{Learning and planning}
+
+There are two main configuration of sequential decision-making problems. The first is reinforcement learning in the strict sense, where the environment is unknown to the agent, which must interact with it and improve its policy by trial and error. In the second, planning, the agent starts with a perfect model of the environment and uses it to calculate improvements to the policy.
+
+\subsubsection*{Exploration and exploitation}
+
+Exploration is the process by which the agent finds new paths or alternative courses of action that allow it to discover better solutions. Exploitation is the process of using the best known solutions to maximize the reward. As such, there is a balance to be found between the two, since both are necessary to solve the problem: the agent should work on optimizing the most promising solutions, but also keep exploring alternatives.
+
+\subsubsection*{Prediction and control}
+
+A prediction is the concept of evaluating the future based on a policy $\pi$, such as predicting the return with a value function $v_\pi(s)$. Control refers to optimizing the future, for example, by finding the optimal policy $\pi_\ast(s)$ that would generate the greatest return. These concepts are related as follows:
+
+\begin{equation}
+    \pi_\ast(s) = \underset{\pi}{\operatorname{argmax}}\,v_\pi(s)
+\end{equation}
+
+The optimal policy is the one that results in the maximum value function. Typically, in reinforcement learning problems, is necessary to first solve the prediction problem by estimating $v_\pi(s)$ in order to solve the control problem, since the value function is used to evaluate and compare different policies.
 
 \section{Definition of the problem}
 
