@@ -3,16 +3,20 @@
 
 \section{Introduction to reinforcement learning}
 
-Reinforcement learning is a form of machine learning that can be described as \say{a way of programming agents by reward and punishment without needing to specify how the task is to be achieved} \cite{Kaelbling:1996}.
+Reinforcement learning is a form of machine learning that can be described as \say{a way of programming agents by reward and punishment without needing to specify how the task is to be achieved} \cite{Kaelbling:1996}. The goal of reinforcement learning is to produce and agent capable of solving a particular problem within an environment. However, the agent has no initial knowledge of the task that it must complete or the effect that its actions have. Instead, it must learn through trial and error by interacting with the environment.
 
 \subsection{Elements}
 
+There are four core elements in a reinforcement learning problem:
+
 \begin{description}
-    \item[Agent] Es el ente que toma las decisiones (ejecuta las acciones) y que debe ir aprendiendo mediante la experiencia, que obtiene de la interacción con el entorno, las mejores acciones a ejecutar.
-    \item[Environment] Todo aquello que interactúa con el agente, cualquier cosa externa a él.
-    \item[States] Representación del entorno en un determinado momento que debe ser suficiente para caracterizarlo completamente en cuanto a la toma de decisiones que debe realizar el agente.
-    \item[Reward signal] Magnitud escalar real cuyo valor acumulado el agente quiere maximizar con el fin de conseguir un objetivo.
+    \item[Agent] The program that makes decisions and takes actions. It must learn what is the best course of action through its experience interacting with the environment.
+    \item[Environment] The context that houses the problem to be solved.
+    \item[States] Snapshots that describe of the environment at a particular point in time and that the agent uses to make its decisions.
+    \item[Reward signal] Real scalar magnitude that the agent needs to maximize in order to achieve its goal.
 \end{description}
+
+These elements are described in greater detail below.
 
 \subsubsection{Environment}
 
