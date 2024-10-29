@@ -73,7 +73,7 @@ The return can also be expressed recursively:
 
 \subsubsection{Agent}
 
-While the previous three elements describe the problem, the agent represent the solution. It is comprised of one or more of the following elements.
+While the previous three elements describe the problem, the agent represents the solution. It is comprised of one or more of the following elements.
 
 \subsubsection*{Policy}
 
@@ -235,13 +235,13 @@ The solution for the optimal value functions can be obtained by maximizing the a
 
 \subsection{Q-Learning}
 
-Q-Learning \cite{Watkins:1992} is a common control algorithm for approximating the optimal action value function. This algorithm estimates $q_\ast$ via a function $Q(s,a)$. The agent interacts with the environment following a greedy policy based on the current value of $Q$: $\pi_\textrm{greedy}(s) = \max_a Q(s,a)$. On every step $t$, the value of $Q$ is updated with the following formula, where the step constant $\alpha \in [0,1)$ determines the magnitude of each update:
+Q-Learning \cite{Watkins:1992} is a common control algorithm for approximating the optimal action value function. This algorithm estimates $q_\ast$ via a function $Q(s,a)$. The agent interacts with the environment following a greedy policy based on the current value of $Q$: $\pi_\textrm{greedy}(s) = \max_a Q(s,a)$. On every step $t$, the value of $Q$ is updated with the following formula, where the step size constant (or learning rate) $\alpha \in [0,1)$ determines the magnitude of each update:
 
 \begin{equation}
     Q(S_t,A_t) = Q(S_t,A_t) + \alpha[R_{t+1} + \gamma \max_a Q(S_{t+1},a) - Q(S_t,A_t)]
 \end{equation}
 
-In this formula, the term $R_{t+1} + \gamma \max_a Q(S_{t+1},a) - Q(S_t,A_t)$ is called the \textit{temporal difference error} (TD error, $\delta_t$) and represents the difference between the current estimation of $Q(S_t,A_t)$ and the new estimation after step $t$.
+In this formula, the term $R_{t+1} + \gamma \max_a Q(S_{t+1},a) - Q(S_t,A_t)$ is called the \textit{temporal difference error} (TD error, $\delta_t$) and represents the difference between the current estimation of $Q(S_t,A_t)$ and the new estimation after step $t$ (also known as target).
 
 \subsection{Deep Q-Learning}
 
