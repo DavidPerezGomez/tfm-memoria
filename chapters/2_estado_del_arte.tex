@@ -1,6 +1,8 @@
 \chapter{State of the art}
 \label{chapter:state_of_the_art}
 
+% TODO intro
+
 \section{Introduction to reinforcement learning}
 
 Reinforcement learning (RL) is a form of machine learning that can be described as \say{a way of programming agents by reward and punishment without needing to specify how the task is to be achieved} \cite{Kaelbling:1996}. The goal of reinforcement learning is to produce and agent capable of solving a particular problem within an environment. However, the agent has no initial knowledge of the task that it must complete or the effect that its actions have. Instead, it must learn through trial and error by interacting with the environment.
@@ -49,7 +51,7 @@ The states describe the evolution of the environment to reflect the actions take
 
 \subsubsection{Reward signal}
 
-The reward signal $R_t$ is a real scalar value that the agent receives after every action it takes. On any given time step $t$, the sum of all future rewards is a random variable $G_t$ known as \textit{return}. The \textit{reward hypothesis} sates that the solution to any problem can be thought as the maximization of the expected value of the return \cite{Sutton:2014}. As such, the agent's goal is to learn actions that maximize the return at the end of the scenario, which doesn't necessarily mean maximizing the immediate reward for the current state. Sometimes it may be necessary to forgo a large immediate reward in favour of greater long-term return.
+The reward signal $R_t$ is a real scalar value that the agent receives after every action it takes. On any given time step $t$, the sum of all future rewards is a random variable $G_t$ known as \textit{return}. The \textit{reward hypothesis} sates that the solution to any problem can be thought as the maximization of the expected value of the return \cite{Sutton:2018}. As such, the agent's goal is to learn actions that maximize the return at the end of the scenario, which doesn't necessarily mean maximizing the immediate reward for the current state. Sometimes it may be necessary to forgo a large immediate reward in favour of greater long-term return.
 
 \begin{equation}
     G_t = R_{t+1} + R_{t+2} + R_{t+3} + \ldots
@@ -128,6 +130,10 @@ The model is an internal representation of the environment that the agent uses t
     \end{equation}
 \end{itemize}
 
+\subsection{Agent taxonomy}
+
+% TODO
+
 \subsection{Challenges in reinforcement learning}
 \label{sec:challenges}
 
@@ -155,10 +161,10 @@ The optimal policy is the one that results in the maximum value function. Typica
 
 \section{Definition of the problem}
 
-A reinforcement learning problem can be described as a Markov decision process \cite{Sutton:2014}, which is defined by the tuple $<\mathcal{S}, \mathcal{A},\mathcal{P},\mathcal{R},\gamma>$.
+A reinforcement learning problem can be described as a Markov decision process \cite{Sutton:2018}, which is defined by the tuple $<\mathcal{S}, \mathcal{A},\mathcal{P},\mathcal{R},\gamma>$.
 
 \begin{description}
-    \item[$\mathcal{S}$] is the finite set of all possible states in the environment ($S_t \in \mathcal{S}$). These states follow the \textit{Markov property} (equation \ref{eq:markov}), which means that the evolution of a state depends only on that state, and is independent of all the previous ones \cite{Sutton:2014}.
+    \item[$\mathcal{S}$] is the finite set of all possible states in the environment ($S_t \in \mathcal{S}$). These states follow the \textit{Markov property} (equation \ref{eq:markov}), which means that the evolution of a state depends only on that state, and is independent of all the previous ones \cite{Sutton:2018}.
     \begin{equation}
     \label{eq:markov}
         P(S_{t+1}|S_t) = P(S_{t+1}|S_1, S_2, \ldots, S_t)
