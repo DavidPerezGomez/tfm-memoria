@@ -100,17 +100,17 @@ The value function calculates the accumulated future reward (the return) of a st
     \item \textbf{State value function:} It calculates the return of following the policy $\pi$ from the state $s$.
     \begin{align}
     \begin{split}
-        v_\pi(s) &= \mathbb{E}_\pi[G_t|S_t = s]\\
-        &= \mathbb{E}_\pi[R_{t+1} + \gamma R_{t+2} + \gamma^2R_{t+3} + \ldots|S_t = s]\\
-        &= \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t = s]
+        v_\pi(s) &= \mathbb{E}_\pi[G_t|S_t = s]%\\
+        % &= \mathbb{E}_\pi[R_{t+1} + \gamma R_{t+2} + \gamma^2R_{t+3} + \ldots|S_t = s]\\
+        % &= \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t = s]
     \end{split}
     \end{align}
     \item \textbf{Action value function:} It calculates the return of taking the action $a$ (regardless of policy) in the state $s$ and then following the policy $\pi$.
     \begin{align}
     \begin{split}
-        q_\pi(s,a) &= \mathbb{E}_\pi[G_t |S_t = s,A_t = a]\\
-        &= \mathbb{E}_\pi[R_{t+1} + \gamma R_{t+2} + \gamma^2R_{t+3} + \ldots|S_t = s,A_t = a]\\
-        &= \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t = s,A_t = a]
+        q_\pi(s,a) &= \mathbb{E}_\pi[G_t |S_t = s,A_t = a]%\\
+        % &= \mathbb{E}_\pi[R_{t+1} + \gamma R_{t+2} + \gamma^2R_{t+3} + \ldots|S_t = s,A_t = a]\\
+        % &= \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t = s,A_t = a]
     \end{split}
     \end{align}
 \end{itemize}
@@ -162,7 +162,7 @@ Next, we introduce some of the common challenges that are found in RL.
 
 There are two main configuration of sequential decision-making problems. The first is reinforcement learning in the strict sense, where the environment is unknown to the agent, which must interact with it and improve its policy by trial and error. In the second, planning, the agent starts with a perfect model of the environment and uses it to calculate improvements to the policy.
 
-These approaches a usually separated, but they may sometimes be related, for example in problems where reinforcement learning is used to create a model of the environment which is then used in planning.
+% These approaches a usually separated, but they may sometimes be related, for example in problems where reinforcement learning is used to create a model of the environment which is then used in planning.
 
 \subsubsection*{Exploration and exploitation}
 
@@ -202,23 +202,23 @@ A reinforcement learning problem can be described as a Markov decision process \
     \item[$\gamma$] is the discount value applied to the rewards when calculating the return.
 \end{description}
 
-Once these elements are defined, the expected value of the rewards used by the value functions can be calculated.
+% Once these elements are defined, the expected value of the rewards used by the value functions can be calculated.
 
-\begin{align}
-\begin{split}
-    \label{eq:bellman_state}
-    v_\pi(s) &= \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t = s] \\
-    &= \sum_{\forall a \in \mathcal{A}}{\pi(a|s)} \sum_{\substack{\forall r \in \mathcal{R} \\ \forall s^\prime \in \mathcal{S}}}{p(r,s^\prime|s,a)[r + \gamma v_\pi(s^\prime)]}
-\end{split}
-\end{align}
+% \begin{align}
+% \begin{split}
+%     \label{eq:bellman_state}
+%     v_\pi(s) &= \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t = s] \\
+%     &= \sum_{\forall a \in \mathcal{A}}{\pi(a|s)} \sum_{\substack{\forall r \in \mathcal{R} \\ \forall s^\prime \in \mathcal{S}}}{p(r,s^\prime|s,a)[r + \gamma v_\pi(s^\prime)]}
+% \end{split}
+% \end{align}
 
-\begin{align}
-\begin{split}
-    \label{eq:bellman_action}
-    q_\pi(s,a) &= \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t = s, A_t = a] \\
-    &= \sum_{\substack{\forall r \in \mathcal{R} \\ \forall s^\prime \in \mathcal{S}}}{p(r,s^\prime|s,a)[r + \gamma \sum_{\forall a \in \mathcal{A}}{\pi(a^\prime|s^\prime)q_\pi(s^\prime,a^\prime)}]}
-\end{split}
-\end{align}
+% \begin{align}
+% \begin{split}
+%     \label{eq:bellman_action}
+%     q_\pi(s,a) &= \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t = s, A_t = a] \\
+%     &= \sum_{\substack{\forall r \in \mathcal{R} \\ \forall s^\prime \in \mathcal{S}}}{p(r,s^\prime|s,a)[r + \gamma \sum_{\forall a \in \mathcal{A}}{\pi(a^\prime|s^\prime)q_\pi(s^\prime,a^\prime)}]}
+% \end{split}
+% \end{align}
 
 \section{Solutions}
 
@@ -248,15 +248,15 @@ Knowing these functions is enough to solve the environment, since they instantly
     \end{cases}
 \end{equation}
 
-The solution for the optimal value functions can be obtained by maximizing the actions in the equations \ref{eq:bellman_state} and \ref{eq:bellman_action}.
+% The solution for the optimal value functions can be obtained by maximizing the actions in the equations \ref{eq:bellman_state} and \ref{eq:bellman_action}.
 
-\begin{equation}
-    v_\ast(s) = \max_{a} \sum_{\substack{\forall r \in \mathcal{R} \\ \forall s^\prime \in \mathcal{S}}}{p(r,s^\prime|s,a)[r + \gamma v_\ast(s^\prime)]}
-\end{equation}
+% \begin{equation}
+%     v_\ast(s) = \max_{a} \sum_{\substack{\forall r \in \mathcal{R} \\ \forall s^\prime \in \mathcal{S}}}{p(r,s^\prime|s,a)[r + \gamma v_\ast(s^\prime)]}
+% \end{equation}
 
-\begin{equation}
-    q_\ast(s,a) = \sum_{\substack{\forall r \in \mathcal{R} \\ \forall s^\prime \in \mathcal{S}}}{p(r,s^\prime|s,a)[r + \gamma \max_{a^\prime} q_\ast(s^\prime,a^\prime)]}
-\end{equation}
+% \begin{equation}
+%     q_\ast(s,a) = \sum_{\substack{\forall r \in \mathcal{R} \\ \forall s^\prime \in \mathcal{S}}}{p(r,s^\prime|s,a)[r + \gamma \max_{a^\prime} q_\ast(s^\prime,a^\prime)]}
+% \end{equation}
 
 \subsection{Q-Learning}
 
