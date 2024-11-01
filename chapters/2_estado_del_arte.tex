@@ -1,7 +1,7 @@
 \chapter{State of the art}
 \label{chapter:state_of_the_art}
 
-% TODO intro
+In this chapter, we introduce the basic elements and concepts of reinforcement learning, we describe the structure of a reinforcement learning problem and the solutions that are relevant to this project, and, finally, we review the state of the art on the matter of efficiency in the field of reinforcement learning.
 
 \section{Introduction to reinforcement learning}
 
@@ -318,6 +318,8 @@ For DRL in particular, its slowness can be traced down to two main characteristi
 For the first problem, a way to increase the effectiveness of each learning step is through the use of episodic deep RL \cite{Botvinick:2019,Pritzel:2017}. This method stores the experiences of the agent during training, that is, the states (in embedded form), actions, and their estimated value (the return obtained). These experiences are used in future episodes to inform decision-making in states similar to other that have already been visited. The usefulness of episodic deep RL depends on a good embedding for the observations, so that they can be properly compared to previous experiences, which is why the process is usually performed by a neural network that learns at the same time as the agent.
 
 For the matter of weak inductive bias, part of the problem is that an initial bias is only beneficial for learning if it applies strongly to the task at hand \cite{Botvinick:2019}. There have been studies for systems that are able to leverage previous knowledge to accelerate new learning, a strategy known as meta-learning (also called \say{learning to learn}) \cite{Botvinick:2019}. In meta-learning, a recurrent neural network is trained on related but different tasks in such a way that it learns about the common elements of the tasks. Since the agent uses a recurrent network, the policy learnt is dependent on the history. Thanks to that, when presented with a new task, similar but different to the ones used in training, it adapts and develops a strategy to optimize the new problem \cite{Wang:2017}.
+
+\subsubsection*{Hierarchical reinforcement learning}
 
 
 % [On Efficiency in Hierarchical Reinforcement Learning](https://proceedings.neurips.cc/paper_files/paper/2020/file/4a5cfa9281924139db466a8a19291aff-Paper.pdf) HRL
