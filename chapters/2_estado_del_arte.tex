@@ -292,20 +292,6 @@ Hierarchical reinforcement learning (HRL) is the strategy of dividing the main p
 
 By tackling several subtasks with reduced complexity, HRL helps mitigate the curse of dimensionality. Additionally the use of independent agents brings the additional benefit of greater modularity and reusability of the solutions \cite{Al-Emran:2015}.
 
-\section{Efficiency in RL}
-
-In chapter \ref{chapter:introduction} we mentioned how research often focuses on the accuracy of the final models. However, that doesn't mean that no effort is dedicated to improving training efficiency. Reinforcement learning algorithms are notoriously sample-inefficient and slow to converge \cite{Botvinick:2019}, making them less than ideal for real-time tasks \cite{Bianchi:2004}.
-
-One strategy that has been studied with the goal of reducing the learning time is the introduction of a heuristic function \cite{Cheng:2021}. The heuristic $h:\mathcal{S}\to\mathbb{R}$ represents a guess of the optimal value function, usually derived from previous experience with the environment, and it is used to guide the agent's learning process. At the beginning of the training, the discount factor for future rewards is increased more than usual, shortening the agent's horizon and making it prefer short-term rewards, which are influenced by the heuristic. As the training progresses and the agent gains more knowledge, the discount is steadily reduced to normal levels, while the effect of the heuristic is also toned down. This algorithm was shown to improve learning efficiency \cite{Cheng:2021}. However, it comes wth the limitation that it requires the existence of a heuristic functions, and its effectiveness is tied to how good said heuristic is, since a bad heuristic can have the opposite effect of slowing down training.
-
-% [Heuristic-Guided Reinforcement Learning](https://proceedings.neurips.cc/paper_files/paper/2021/file/70d31b87bd021441e5e6bf23eb84a306-Paper.pdf) QL
-
-% [Heuristically Accelerated Q–Learning: a new approach to speed up Reinforcement Learning](https://d1wqtxts1xzle7.cloudfront.net/76561779/BianchiRibeiroCosta04-LNAI-libre.pdf?1639682088=&response-content-disposition=inline\%3B+filename\%3DHeuristically_Accelerated_Q_Learning_a_n.pdf&Expires=1730472021&Signature=H9adm4S3U55uv421-gPeE3Pbd8J49MlYWasFxZZ7~KFfDdDIbM7eARRyUpJeHAeS0P1oq~me~T5aHOsNGocCmazBEMjhJVeVG6QGIh1Og~lqcBNzv6bckLM174Iap72c34TeDCORQ-4tJoC-Lx54QajGDkWM8jireXeajeS0Su~1qNhuGl8s69SZ0Fo0DHVmD34wEmgdD0A7iXWobuPklJdl5CivdIyg~bUftnwY5sJOZ6HFPmHhER3DRtUZW96UflwAuedas~wsiWDe5tFymKKXWTcVaRwsnIsHUFojvZH4uK~CV1hh2jq8D9M3fczn1GRF9YakYhfgSNjQi3vtXw__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA) QL
-
-% Deep reinforcement learning is a powerful tool
-
-% [Reinforcement Learning, Fast and Slow](https://www.cell.com/trends/cognitie-sciences/fulltext/S1364-6613(19)30061-0) DRL
-
 % [Why Does Hierarchy (Sometimes) Work So Well in Reinforcement Learning?](https://arxiv.org/abs/1909.10618) HRL
 
 % Recent work has made much progress towards delivering on this promise (Levy et al., 2017; Frans
@@ -314,6 +300,24 @@ One strategy that has been studied with the goal of reducing the learning time i
 % state-of-the-art non-hierarchical methods are shown to make negligible progress on the same tasks.
 % Levy et al. (2017) demonstrate similar results on complex navigation tasks, showing that HRL can
 % find good policies with 3-5x fewer environment interactions than non-hierarchical methods
+
+\section{Efficiency in Reinforcement learning}
+
+In chapter \ref{chapter:introduction} we mentioned how research often focuses on the accuracy of the final models. However, that doesn't mean that no effort is dedicated to improving training efficiency.
+
+\subsubsection*{Heuristic guiding}
+
+Reinforcement learning algorithms are notoriously sample-inefficient and slow to converge \cite{Botvinick:2019}, making them less than ideal for real-time tasks \cite{Bianchi:2004}. One strategy that has been studied with the goal of reducing the learning time is the introduction of a heuristic function \cite{Cheng:2021}. The heuristic $h:\mathcal{S}\to\mathbb{R}$ represents a guess of the optimal value function, usually derived from previous experience with the environment, and it is used to guide the agent's learning process. At the beginning of the training, the discount factor for future rewards is increased more than usual, shortening the agent's horizon and making it prefer short-term rewards, which are influenced by the heuristic. As the training progresses and the agent gains more knowledge, the discount is steadily reduced to normal levels, while the effect of the heuristic is also toned down.
+
+This algorithm was shown to improve learning efficiency \cite{Cheng:2021}. However, it comes wth the limitation that it requires the existence of a heuristic functions, and its effectiveness is tied to how good said heuristic is, since a bad heuristic can have the opposite effect of slowing down training.
+
+\subsubsection*{Deep reinforcement learning}
+
+For DRL in particular, its slowness can be traced down to two main characteristics \cite{Botvinick:2019}. The first one is the need for incremental parameter adjustment. This refers to the fact that since the algorithms are using deep neural networks updated via stochastic gradient, the adjustment (the step-size for each learning step) must be small enough to not override the effects of previous learning. The second one is its weak inductive bias. Since neural networks are generic learning systems meant to solve a wide variety of problems, they lack any form of initial strong bias that would accelerate the learning process.
+
+For the first problem, a way to increase the effectiveness of each learning step is through the use of episodic deep RL \cite{Botvinick:2019,Pritzel:2017}. This method stores the experiences of the agent during training, that is, the states (in embedded form), actions, and their estimated value (the return obtained). These experiences are used in future episodes to inform decision-making in states similar to other that have already been visited. The usefulness of episodic deep RL depends on a good embedding for the observations, so that they can be properly compared to previous experiences, which is why the process is usually performed by a neural network that learns at the same time as the agent.
+
+For the matter of weak inductive bias, part of the problem is that an initial bias is only beneficial for learning if it applies strongly to the task at hand \cite{Botvinick:2019}. There have been studies for systems that are able to leverage previous knowledge to accelerate new learning, a strategy known as meta-learning (also called \say{learning to learn}) \cite{Botvinick:2019}. In meta-learning, a recurrent neural network is trained on related but different tasks in such a way that it learns about the common elements of the tasks. Since the agent uses a recurrent network, the policy learnt is dependent on the history. Thanks to that, when presented with a new task, similar but different to the ones used in training, it adapts and develops a strategy to optimize the new problem \cite{Wang:2017}.
 
 
 % [On Efficiency in Hierarchical Reinforcement Learning](https://proceedings.neurips.cc/paper_files/paper/2020/file/4a5cfa9281924139db466a8a19291aff-Paper.pdf) HRL
