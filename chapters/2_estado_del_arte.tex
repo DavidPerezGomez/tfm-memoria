@@ -307,18 +307,11 @@ Algorithm \ref{alg:dqn2} shows what Deep Q-Learning looks like after the aforeme
 
 \section{Hierarchical reinforcement learning}
 
-Hierarchical reinforcement learning (HRL) is the strategy of dividing the main problem into several sub-problems, which are then learned by a hierarchy of agents trained by reinforcement learning \cite{Barto:2003, Al-Emran:2015, Pateria:2021}. This hierarchy typically sees a number of low-level agents learn only one specific subtask, but these agents don't choose when they get to act. Instead, a higher-level agent decides what subtask to pursue at any given point, essentially using its actions to select which lower-level agent gets to interact with the environment. Depending on the complexity of the problem, this hierarchy may have an arbitrary number of abstraction layers.
+Hierarchical reinforcement learning (HRL) is the strategy of dividing the main problem into several sub-problems, which are then learned by a hierarchy of agents trained by reinforcement learning \cite{Barto:2003, Al-Emran:2015, Pateria:2021}. There are different strategies on how to implement the hierarchy (feudal \cite{Vezhnevets:2017}, MAXQ \cite{Dietterich:1999}, etc.) but we will focus on one usually referred to as \textit{options} \cite{Sutton:2018}. In this methodology, the main task is divided manually into any number of subtasks, which usually correspond with higher-level concepts. Each subtask is treated as a RL problem by itself, and an agent is trained for each of them, sometimes receiving rewards specific to the subtask rather than the entire environment \cite{Pateria:2021}. These are the low-level agents in the hierarchy, which take the basic actions available in the environment to interact with it. Above them, a higher-level agent is trained to perform the main task as a sequence of subtasks, and uses its action to select which subtask (which low-level agent) to follow at any point in time. Depending on the complexity of the problem, this hierarchy may have an arbitrary number of abstraction layers.
 
-By tackling several subtasks with reduced complexity, HRL helps mitigate the curse of dimensionality. Additionally the use of independent agents brings the additional benefit of greater modularity and reusability of the solutions \cite{Al-Emran:2015}.
+The high-level agent doesn't usually act on every step of the environment. Instead, it is temporally abstracted, only taking actions (and learning) every $c$ steps, while the low-level level agent that has been selected most recently continues acting \cite{Sutton:2018}. This temporal extensions during both exploration and training has been shown to be one of the main reasons that HRL is able to make progress in in problems that single-agent RL cannot \cite{Nachum:2019}.
 
-% [Why Does Hierarchy (Sometimes) Work So Well in Reinforcement Learning?](https://arxiv.org/abs/1909.10618) HRL
-
-% Recent work has made much progress towards delivering on this promise (Levy et al., 2017; Frans
-% et al., 2018; Vezhnevets et al., 2017; Nachum et al., 2019). For example, Nachum et al. (2018a;b;
-% 2019) use HRL to solve both simulated and real-world quadrupedal manipulation tasks, whereas
-% state-of-the-art non-hierarchical methods are shown to make negligible progress on the same tasks.
-% Levy et al. (2017) demonstrate similar results on complex navigation tasks, showing that HRL can
-% find good policies with 3-5x fewer environment interactions than non-hierarchical methods
+Another benefit of HRL is that by tackling several subtasks with reduced complexity, it helps mitigate the curse of dimensionality. Additionally the use of independent agents brings the allows for greater modularity and reusability of the solutions \cite{Al-Emran:2015}.
 
 \section{Efficiency in Reinforcement learning}
 
@@ -338,7 +331,6 @@ For the first problem, a way to increase the effectiveness of each learning step
 
 For the matter of weak inductive bias, part of the problem is that an initial bias is only beneficial for learning if it applies strongly to the task at hand \cite{Botvinick:2019}. There have been studies for systems that are able to leverage previous knowledge to accelerate new learning, a strategy known as meta-learning (also called \say{learning to learn}) \cite{Botvinick:2019}. In meta-learning, a recurrent neural network is trained on related but different tasks in such a way that it learns about the common elements of the tasks. Since the agent uses a recurrent network, the policy learnt is dependent on the history. Thanks to that, when presented with a new task, similar but different to the ones used in training, it adapts and develops a strategy to optimize the new problem \cite{Wang:2017}.
 
-\subsubsection*{Hierarchical reinforcement learning}
-
+% \subsubsection*{Hierarchical reinforcement learning}
 
 % [On Efficiency in Hierarchical Reinforcement Learning](https://proceedings.neurips.cc/paper_files/paper/2020/file/4a5cfa9281924139db466a8a19291aff-Paper.pdf) HRL
