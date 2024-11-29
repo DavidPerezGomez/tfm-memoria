@@ -1,7 +1,7 @@
 \chapter{State of the art}
 \label{chapter:state_of_the_art}
 
-In this chapter, we introduce the basic elements and concepts of reinforcement learning, we describe the structure of a reinforcement learning problem and the solutions that are relevant to this project, and, finally, we review the state of the art on the matter of efficiency in the field of reinforcement learning.
+In this chapter, we introduce the basic elements and concepts of reinforcement learning, we describe the structure of a reinforcement learning problem, the solutions that are relevant to this project and the concept of hierarchical reinforcement learning, and finally, we review the state of the art on the matter of efficiency in the field of reinforcement learning.
 
 \section{Introduction to reinforcement learning}
 
@@ -94,10 +94,10 @@ The policy $\pi(\cdot)$ is a function that determines the action that the agent 
 
 \subsubsection*{Value function}
 
-The value function calculates the accumulated future reward (the return) of a state given a policy to follow. This allows us to estimate how \say{good} it is to be in any specific state. There are two approaches:
+The value function calculates the expected accumulated future reward (the return) of a state given a policy to follow. This allows us to estimate how \say{good} it is to be in any specific state. There are two approaches:
 
 \begin{itemize}
-    \item \textbf{State value function:} It calculates the return of following the policy $\pi$ from the state $s$.
+    \item \textbf{State value function:} It calculates the expected return of following the policy $\pi$ from the state $s$.
     \begin{align}
     \begin{split}
         v_\pi(s) &= \mathbb{E}_\pi[G_t|S_t = s]%\\
@@ -105,7 +105,7 @@ The value function calculates the accumulated future reward (the return) of a st
         % &= \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t = s]
     \end{split}
     \end{align}
-    \item \textbf{Action value function:} It calculates the return of taking the action $a$ (regardless of policy) in the state $s$ and then following the policy $\pi$.
+    \item \textbf{Action value function:} It calculates the expected return of taking the action $a$ (regardless of policy) in the state $s$ and then following the policy $\pi$.
     \begin{align}
     \begin{split}
         q_\pi(s,a) &= \mathbb{E}_\pi[G_t |S_t = s,A_t = a]%\\
@@ -124,7 +124,7 @@ The model is an internal representation of the environment that the agent uses t
     \begin{equation}
         \mathcal{P}^a_{ss^\prime} = p(s^\prime|s,a) \approx P(S_{t+1} = s^\prime|S_t = s, A_t = a)
     \end{equation}
-    \item \textbf{Reward model $\mathcal{R}$:} It approximates the reward that the agent will receive when performing the action $a$ in the state $s$.
+    \item \textbf{Reward model $\mathcal{R}$:} It approximates the expected reward that the agent will receive when performing the action $a$ in the state $s$.
     \begin{equation}
         \mathcal{R}^a_s = r(s,a) \approx \mathbb{E}[R_{t+1}| S_t = s, A_t = a]
     \end{equation}
@@ -309,13 +309,13 @@ Algorithm \ref{alg:dqn2} shows what Deep Q-Learning looks like after the aforeme
 
 Hierarchical reinforcement learning (HRL) is the strategy of dividing the main problem into several sub-problems, which are then learned by a hierarchy of agents trained by reinforcement learning \cite{Barto:2003, Al-Emran:2015, Pateria:2021}. There are different strategies on how to implement the hierarchy (feudal \cite{Vezhnevets:2017}, MAXQ \cite{Dietterich:1999}, etc.) but in this project, we will focus on the one usually referred to as \textit{options} \cite{Sutton:2018}. In this methodology, the main task is divided manually into any number of subtasks, which usually correspond with higher-level concepts. Each subtask is treated as a RL problem by itself, and an agent is trained for each of them, sometimes receiving rewards specific to the subtask rather than the entire environment \cite{Pateria:2021}. These are the low-level agents in the hierarchy, which take the basic actions available in the environment to interact with it. Above them, a higher-level agent is trained to perform the main task as a sequence of subtasks, and uses its action to select which subtask (which low-level agent) to follow at any point in time. Depending on the complexity of the problem, this hierarchy may have an arbitrary number of abstraction layers.
 
-The high-level agent doesn't usually act on every step of the environment. Instead, it is temporally abstracted, only taking actions (and learning) every $c$ steps, while the low-level level agent that has been selected most recently continues acting \cite{Sutton:2018}. This temporal extensions during both exploration and training has been shown to be one of the main reasons that HRL is able to make progress in in problems that single-agent RL cannot \cite{Nachum:2019}.
+The high-level agent doesn't usually act on every step of the environment. Instead, it is temporally abstracted, only taking actions (and learning) every $c$ steps, while the low-level level agent that has been selected most recently continues acting \cite{Sutton:2018}. This temporal extensions during both exploration and training has been shown to be one of the main reasons that HRL is able to make progress in problems that single-agent RL cannot \cite{Nachum:2019}.
 
 Another benefit of HRL is that by tackling several subtasks with reduced complexity, it helps mitigate the curse of dimensionality. Additionally the use of independent agents brings the allows for greater modularity and reusability of the solutions \cite{Al-Emran:2015}.
 
 The applications of HRL are wide and varied, and just in recent years it has been researched as a solution for self-driving cars \cite{Duan:2020}, to control energy management in hybrid vehicles \cite{Qi:2022}, to optimize the placement of components in micro-chips \cite{Tan:2024} and to reconstruct 3D meshes from 2D images \cite{Li:2023}.
 
-\section{Efficiency in Reinforcement learning}
+\section{Efficiency in reinforcement learning}
 
 In chapter \ref{chapter:introduction} we mentioned how research often focuses on the accuracy of the final models. However, that doesn't mean that no effort is dedicated to improving training efficiency.
 
