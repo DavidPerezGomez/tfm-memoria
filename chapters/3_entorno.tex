@@ -107,7 +107,7 @@ As for the marines, all barracks are built next to the main base and close to ea
 
 \subsection{Observation}
 
-Even though the structured observation provided by PySC2 has a predictable form, it is variable enough that it cannot be used as-is as the input for a neural network. For that reason, and for the fact that it contains considerably more information than our agent could possible need, we have created our own observation data structure to represent the state of the game. Our observation contains mostly data obtained from PySC2's observation, plus some additional data that we calculate. The complete list of fields can be found in appendix \ref{app:observation}. but some highlights include:
+Even though the structured observation provided by PySC2 has a predictable form, it is variable enough that it cannot be used as-is as the input for a neural network. For that reason, and for the fact that it contains considerably more information than our agent could possible need, we have created our own observation data structure to represent the state of the game. Our observation contains mostly data obtained from PySC2's observation, plus some additional data that we calculate. The complete list of fields and their description can be found in appendix \ref{app:observation}, but some highlights include:
 
 \begin{itemize}
     \item The amount of resourced the agent has.
