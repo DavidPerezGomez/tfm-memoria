@@ -52,11 +52,11 @@ Since our goal is not to create an agent as proficient as possible in the game o
 
 \subsection{Race selection and technology progression}
 
-Firstly, we have limited the race selection during all of our experiments to only one of the three races. That includes for both outs agents and the opponents they will fight against. The reason for this is that all three races are extremely different in many aspects of play. They create different units and structures, follow different progressions, interact with resources in different ways and are better suited for different strategies.
+Firstly, we have limited the race selection during all of our experiments to only one of the three races. That includes both our agents and the opponents they will fight against. The reason for this is that all three races are extremely different in many aspects of play. They create different units and structures, follow different progressions, interact with resources in different ways and are better suited for different strategies.
 
-Similarly, we have also decided to have the agents work with only a fraction of the entire toolset available for the race. This is because the technology progression tree of structures, units and upgrades is unnecessarily expansive and nuanced for our goals.
+Similarly, we have also decided to have the agents work with only a fraction of the entire toolset available for the race. This is because the technology progression tree of structures, units and upgrades is far too expansive and nuanced for our scope.
 
-Taking this into account, we have chosen the Terrans as the race to focus on since it can be considered the most basic and straight-forward of the three, and the one that functions best with a limited progression. The agents will have access to the following units and structures:
+Taking this into account, we have chosen the Terrans as the race to focus on since it can be considered the most simple and straight-forward of the three, and the one that functions best with a limited progression. The agents will have access to the following units and structures:
 
 \begin{itemize}
     \item \textbf{Command center:} Structure used to recruit new SCVs and necessary to collect minerals, the main resource of the game. Every player begins the game with one command center next to a patch of mineral crystals.
@@ -83,7 +83,7 @@ To limit the action space to a more manageable level and to align with the limit
 
 \begin{itemize}
     \item \textbf{\texttt{NO\_OP:}} No action is taken for the current step.
-    \item \textbf{\texttt{HARVEST\_MINERALS:}} Order a random idle worker to gather minerals from the closes mineral patch.
+    \item \textbf{\texttt{HARVEST\_MINERALS:}} Order a random idle worker to gather minerals from the closes mineral deposit.
     \item \textbf{\texttt{BUILD\_COMMAND\_CENTER:}} Order a random idle or harvesting worker to build a command center. The agent can only have up to three command centers.
     \item \textbf{\texttt{RECRUIT\_SCV\_0:}} Recruit an SCV on the first command center.
     \item \textbf{\texttt{RECRUIT\_SCV\_1:}} Recruit an SCV on the second command center.
@@ -101,7 +101,7 @@ To limit the action space to a more manageable level and to align with the limit
 
 For all building types, we have predefined all the position where they can be built for each map. The versus map we will use only supports up to two additional bases, which is why we limit the command centers to three (including the one each player starts with). The supply depots are limited to 24 since that is the amount that will bring the supply resource to its maximum. Any supply depot beyond the 24\textsuperscript{th} will have no effect. The limit of four barracks is somewhat arbitrary. Four is enough to build marines at a sufficient speed to win the game.
 
-When it comes to recruiting new units, we have allowed the agent to choose in which of its command centers to build the SCVs. Because assigning too many workers to harvest on the same mineral patch has diminishing returns, and since the harvest order always points the selected worker to the closest mineral patch, this give the agent a certain amount of control on which of the bases resource economy to develop.
+When it comes to recruiting new units, we have allowed the agent to choose in which of its command centers to build the SCVs. Because assigning too many workers to harvest on the same mineral patch has diminishing returns, and since the harvest order always points the selected worker to the closest mineral deposit, this give the agent a certain amount of control on which of the bases' resource economy to develop.
 
 As for the marines, all barracks are built next to the main base and close to each other, so there is no point in differentiating between them.
 
@@ -110,10 +110,10 @@ As for the marines, all barracks are built next to the main base and close to ea
 Even though the structured observation provided by PySC2 has a predictable form, it is variable enough that it cannot be used as-is as the input for a neural network. For that reason, and for the fact that it contains considerably more information than our agent could possible need, we have created our own observation data structure to represent the state of the game. Our observation contains mostly data obtained from PySC2's observation, plus some additional data that we calculate. The complete list of fields and their description can be found in appendix \ref{app:observation}, but some highlights include:
 
 \begin{itemize}
-    \item The amount of resourced the agent has.
+    \item The amount of resources the agent has.
     \item The number of each building type the agent has.
     \item The number of workers and marines the agent has.
-    \item The number of workers that are idle, building or harvesting on each command center.
+    \item The number of workers that are idle, building or harvesting and each command center.
     \item The distance from the marines to various targets.
     \item The list of actions the agent can successfully take on the current step.
     \item The enemy's total army health.
@@ -128,16 +128,16 @@ The reward signals we have chosen will vary depending on the map and its objecti
 \section{Custom scenarios}
 \label{sec:mini-games}
 
-We found that the mini-games distributed with PySC2 didn't fit with the needs and limitations of out different agents, which are explained in chapter \ref{chapter:implementation}. For that reason, we have used the StarCraft II map editor to create out own custom maps.
+We found that the mini-games distributed with PySC2 didn't fit with the needs and limitations of our different agents, which are explained in chapter \ref{chapter:implementation}. For that reason, we have used the StarCraft II map editor to create our own custom maps.
 
 \subsubsection*{\texttt{BuildMarinesRandom}}
 
 The objective of this mini-game is to recruit as many marines as possible in a limited time-frame. The agent start with one command center and 16 SCVs next to a mineral patch. Additionally, to favour the exploration process, the scenario can randomly start with one supply depot already built, or one supply depot and one to four barracks already built. The more advanced the starting base, the less likely it is.
 
-The map has a fixed duration of 10 minutes. The score calculated each step is the amount of minerals spent on recruiting marines since the last step. The agent has to build supply depots, barracks and marines in the most optimal way possible to maximize the score.
+The map has a fixed duration of 10 minutes. The score for each step is the amount of minerals spent on recruiting marines since the last step. The agent has to build supply depots, barracks and marines in the most optimal way possible to maximize the score.
 
 $$
-r(t) = \text{spending\_marines}_{t} - \text{spending\_marines}_{t-1}
+r(t) = \texttt{spending\_marines}_{t} - \texttt{spending\_marines}_{t-1}
 $$
 
 \subsubsection*{\texttt{BuildMarinesFixed}}
@@ -148,10 +148,10 @@ This map is identical to \texttt{BuildMarinesRandom} except that it always start
 
 The objective of this mini-game is to harvest as many minerals as possible in a limited time-frame. The agent start with one command center and 16 SCVs next to a mineral patch. The map includes two additional mineral patches to allow for up to two more bases to be built. Additionally, to favour the exploration process, the scenario can randomly start with one or two extra command centers already built. The more starting command centers, the less likely it is.
 
-The map has a fixed duration of 12 minutes. The score calculated each step is the amount of minerals gained or lost since the last step. The agent has to build SCVs, supply depots, and command centers in the most optimal way possible to maximize the score.
+The map has a fixed duration of 12 minutes. The score for each step is the amount of minerals gained or lost since the last step. The agent has to build SCVs, supply depots, and command centers in the most optimal way possible to maximize the score.
 
 $$
-r(t) = \text{minerals}_{t} - \text{minerals}_{t-1}
+r(t) = \texttt{minerals}_{t} - \texttt{minerals}_{t-1}
 $$
 
 \subsubsection*{\texttt{CollectMineralsFixed}}
@@ -162,18 +162,21 @@ This map is identical to \texttt{CollectMineralsRandom} except that it always st
 
 The objective of this mini-game is to defeat two small enemy bases. The agent starts with a group of marines of variable size placed a random point close to the center of the map. The enemy bases consist of three supply depots, a small random number of SCVs and a small random number of marines, randomly positioned on opposite corners of the map. The enemy marines are programmed to attack any units that damage nearby buildings and the SCVs are programmed to repair nearby buildings. The number of ally and enemy marines is set up so that the allies can destroy both bases reliably if played correctly.
 
-The map ends when all enemy buildings have been destroyed or after 3 minutes. The score calculated each step is the amount that the total ally health minus the total enemy health has changed since the last step, with an additional flat penalty each step to encourage faster episodes. The agent has to prioritize targeting enemy marines, then SCVs and then buildings, and to focus on a single base at a time to maximize the score.
+The map ends when all enemy buildings have been destroyed or after 3 minutes. The score for each step is the change in health score since the last step, with an additional flat penalty each step to encourage faster episodes. The agent has to prioritize targeting enemy marines, then SCVs and then buildings, and to focus on a single base at a time to maximize the score.
 
 $$
-r(t) = (\text{health\_allies}_{t} - \text{health\_enemies}_{t}) - (\text{health\_allies}_{t-1} - \text{health\_enemies}_{t-1})
+\texttt{health\_score} = \texttt{health\_allies} \cdot 1.1 - \texttt{health\_enemies}
+$$
+$$
+r(t) = \texttt{health\_score}_{t} - \texttt{health\_score}_{t-1} - \texttt{step\_cost}
 $$
 
 \subsubsection*{\texttt{Simple64}}
 
 This is the only custom map included in PySC2 that we used without any changes. It is a two-player map, classified as a \say{melee} map instead of a mini-game, meaning the objective is simply to defeat the enemy player. Each player starts, randomly, in one of two opposite corners of a symmetric battlefield with a command center and 12 SCVs next to a mineral patch. This emulates a real game of StarCraft II.
 
-The game ends when one of the player has been defeated (by losing all of their structures). It can also end in a draw if enough time passes with none of the players being able to gather more resources, produce more units or destroy enemy units. The score calculated each step is the amount that the number of ally marines minus the number of enemy marines has changed since the last step.
+The game ends when one of the player has been defeated (by losing all of their structures). It can also end in a draw if enough time passes with none of the players being able to gather more resources, produce more units or destroy enemy units. The score for each step is the change in a custom player score since the last step. The player score is calculated with the mineral value of all units of that player factored by the health or build progress of the unit.
 
 $$
-r(t) = (\text{ally\_marines}_{t} - \text{enemy\_marines}_{t}) - (\text{ally\_marines}_{t-1} - \text{enemy\_marines}_{t-1})
+r(t) = (\texttt{ally\_score}_{t} - \texttt{enemy\_score}_{t}) - (\texttt{ally\_score}_{t-1} - \texttt{enemy\_score}_{t-1})
 $$
