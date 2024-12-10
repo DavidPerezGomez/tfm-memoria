@@ -32,9 +32,9 @@ Additionally, the agents also have access to structured data about the state of 
 
 \subsubsection*{Action space}
 
-PySC2 allows the agents to interact with the game by calling functions that represent game actions that a regular player could take. These functions come in two forms. One type of function includes clicking on the screen to select a unit, dragging a rectangle to select multiple units, clicking again to issue and order to move or attack, dragging the mouse to move the camera, etc. These mimic the way the player interacts with the game, mostly by clicking the game area or the mini-map or pressing hot-keys.
+PySC2 allows the agents to interact with the game by calling functions that represent game actions that a regular player could take. These functions come in two forms. One type of function mimics the way a player would interact with the game, mostly by clicking the game area or the mini-map or pressing hot-keys. This includes clicking on the screen to select a unit, dragging a rectangle to select multiple units, clicking again to issue and order to move or attack, dragging the mouse to move the camera, etc.
 
-The second type of function, called \say{raw functions}, encodes higher level action, such as attacking a specific point with one or more units, or building a structure. With these function, the agent doesn't need to select units before giving the command, or move the camera to be able to see the area where it wants to build. The library handles all the low level actions related to game-control and leaves the agent to focus on decision-making.
+The second type of function, called \say{raw function}, encodes higher level actions, such as attacking a specific point with one or more units, building a structure with a specific worker or sending a worker to gather resources. With these, the agent doesn't need to select units before giving the command, or move the camera to be able to see the area where it wants to build or attack. The library handles all the low level \say{basic} actions related to game-control that would combine to form a \say{raw function}.
 
 \subsubsection*{Reward signal}
 
@@ -78,6 +78,7 @@ These units, although limited for a normal game of StarCraft II, are enough for 
 \end{enumerate}
 
 \subsection{Action space}
+\label{sec:action_space}
 
 To limit the action space to a more manageable level and to align with the limited progression described previously, we have decided on the following list of action for the agents:
 
