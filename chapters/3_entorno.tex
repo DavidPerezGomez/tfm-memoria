@@ -15,7 +15,7 @@ The game also supports user-created maps and is distributed alongside a map edit
 
 PySC2 is a python library developed by the Google Deep Mind team in collaboration with Blizzard \cite{Vinyals:2017}. It wraps the StarCraft II API and provides specifications for agent actions and environment observations, as well as a reward signal, which allow the use of the game as a reinforcement learning environment.
 
-One of the major benefits of this library is that it can run the game tens of times faster than regular game-play. We can also configure how long the environment steps will be in relation to game-steps, to determine how frequently the agent will act. For example, one environment step every 16 game-steps is roughly equivalent to one action per second.
+One of the major benefits of this library is that it can run the game tens of times faster than regular game-play. Internally, the game runs at 16 ticks per in-game second. When running the game at normal speed an in-game second matches a real-life second. PySC2 can run the game at much faster speeds, and we can configure how often (in terms of game ticks) it will stop the simulation, provide an observation and wait until our agent selects an action. For example, by setting the configuration value \texttt{step\_mul} to 32, PySC2 will poll our agent every 32 game ticks, which means the agent will act once every two in-game seconds.
 
 \subsubsection*{Observation}
 
