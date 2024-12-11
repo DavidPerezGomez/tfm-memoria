@@ -140,7 +140,7 @@ As for the Marines, all Barracks are built next to the main base and close to ea
 Even though the structured observation provided by PySC2 has a predictable form, it is variable enough that it cannot be used as-is as the input for a neural network. For that reason, and for the fact that it contains considerably more information than our agent could possible need, we have created our own observation data structure to represent the state of the game. Our observation contains mostly data obtained from PySC2's observation, plus some additional data that we calculate. The complete list of fields and their description can be found in appendix \ref{app:observation}, but some highlights include:
 
 \begin{itemize}
-    \item The amount of resources the agent has.
+    \item The amount of minerals the agent has.
     \item The number of each building type the agent has.
     \item The number of workers and Marines the agent has.
     \item The number of workers that are idle, building or harvesting and each Command Center.
@@ -149,7 +149,7 @@ Even though the structured observation provided by PySC2 has a predictable form,
     \item The enemy's total army health.
 \end{itemize}
 
-We make no use of the visual information provided by the feature layers.
+We make no use of the visual information provided by the feature layers. This is because processing images would require the use of convolutional neural networks, which would be beyond our scope of complexity. Additionally, we have no need to make the agents play in the same way as humans, since that is not part of our goals.
 
 \subsection{Reward signal}
 
