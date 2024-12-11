@@ -86,21 +86,23 @@ Similarly, we have also decided to have the agents work with only a fraction of 
 Taking this into account, we have chosen the Terrans as the race to focus on since it can be considered the most simple and straight-forward of the three, and the one that functions best with a limited progression. The agents will have access to the following units and structures:
 
 \begin{itemize}
-    \item \textbf{Command center:} Structure used to recruit new SCVs and necessary to collect minerals, the main resource of the game. Every player begins the game with one command center next to a patch of mineral crystals.
-    \item \textbf{SCV:} Worker unit used to build all Terran structures and to collect minerals and take them to a command center. Every player begins the game with eight SCVs.
-    \item \textbf{Supply depot:} Structure that increases the maximum supply of the player, which determines the amount of unit the player can have. At least one supply depot is required to build a barracks.
-    \item \textbf{Barracks:} Structure used to recruit new marines.
-    \item \textbf{Marine:} Ranged combat unit capable of attacking and destroying enemy units and structures.
+    \item \textbf{Command Center:} Town hall for the Terran Race. It can recruit SCVs and is necessary to collect minerals and vespene. Every player begins the game with one command center next to a patch of mineral crystals. Costs 400 minerals and takes 71 seconds to build.
+    \item \textbf{SCV:} Worker unit used to build all Terran structures and to collect minerals and vespene and take them to the closest Command Center. It has limited combat abilities, but we won't make use of them for the sake of simplicity. Every player begins the game with eight SCVs. Costs 50 minerals and 1 supply, and takes 12 seconds to train.
+    \item \textbf{Supply Depot:} Structure that increases the maximum supply of the player, which determines the amount of units the player can have at the same time. At least one supply depot is required to build a Barracks. Costs 100 minerals and takes 21 seconds to build.
+    \item \textbf{Barracks:} Structure used to recruit new marines. Costs 150 minerals and takes 46 seconds to build.
+    \item \textbf{Marine:} Ranged combat unit capable of attacking and destroying enemy units and structures. It cannot harvest resources or build structures. Costs 50 minerals and takes 25 seconds to train.
 \end{itemize}
+
+Since we selected only the most basic units and structures, none of them require vespene gas, which means the agents will only need to work with minerals.
 
 These units, although limited for a normal game of StarCraft II, are enough for the agents to perform the basic, general steps required to win the game. The expected strategy would be:
 
 \begin{enumerate}
     \item Gather minerals with the starting SCVs and build new SCVs to speed up the process.
-    \item Optionally, build a new command center near another source of minerals and more workers to improve the resource economy.
-    \item Build a supply depot.
-    \item Build a barracks.
-    \item Start recruiting marines while continuing to build supply depots (to allow for more marines) and barracks (to recruit marines faster).
+    \item Optionally, build a new Command Center near another source of minerals and more workers to improve the resource economy.
+    \item Build a Supply Depot.
+    \item Build a Barracks.
+    \item Start recruiting Marines while continuing to build Supply Depots (to allow for more marines) and Barracks (to recruit Marines faster).
     \item Attack the enemy base with the marines.
 \end{enumerate}
 
