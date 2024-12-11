@@ -86,10 +86,10 @@ Similarly, we have also decided to have the agents work with only a fraction of 
 Taking this into account, we have chosen the Terrans as the race to focus on since it can be considered the most simple and straight-forward of the three, and the one that functions best with a limited progression. The agents will have access to the following units and structures:
 
 \begin{itemize}
-    \item \textbf{Command Center:} Town hall for the Terran Race. It can recruit SCVs and is necessary to collect minerals and vespene. Every player begins the game with one command center next to a patch of mineral crystals. Costs 400 minerals and takes 71 seconds to build.
+    \item \textbf{Command Center:} Town hall for the Terran Race. It can recruit SCVs and is necessary to collect minerals and vespene. Every player begins the game with one Command Center next to a patch of mineral crystals. Costs 400 minerals and takes 71 seconds to build.
     \item \textbf{SCV:} Worker unit used to build all Terran structures and to collect minerals and vespene and take them to the closest Command Center. It has limited combat abilities, but we won't make use of them for the sake of simplicity. Every player begins the game with eight SCVs. Costs 50 minerals and 1 supply, and takes 12 seconds to train.
-    \item \textbf{Supply Depot:} Structure that increases the maximum supply of the player, which determines the amount of units the player can have at the same time. At least one supply depot is required to build a Barracks. Costs 100 minerals and takes 21 seconds to build.
-    \item \textbf{Barracks:} Structure used to recruit new marines. Costs 150 minerals and takes 46 seconds to build.
+    \item \textbf{Supply Depot:} Structure that increases the maximum supply of the player, which determines the amount of units the player can have at the same time. At least one Supply Depot is required to build a Barracks. Costs 100 minerals and takes 21 seconds to build.
+    \item \textbf{Barracks:} Structure used to recruit new Marines. Costs 150 minerals and takes 46 seconds to build.
     \item \textbf{Marine:} Ranged combat unit capable of attacking and destroying enemy units and structures. It cannot harvest resources or build structures. Costs 50 minerals and takes 25 seconds to train.
 \end{itemize}
 
@@ -102,8 +102,8 @@ These units, although limited for a normal game of StarCraft II, are enough for 
     \item Optionally, build a new Command Center near another source of minerals and more workers to improve the resource economy.
     \item Build a Supply Depot.
     \item Build a Barracks.
-    \item Start recruiting Marines while continuing to build Supply Depots (to allow for more marines) and Barracks (to recruit Marines faster).
-    \item Attack the enemy base with the marines.
+    \item Start recruiting Marines while continuing to build Supply Depots (to allow for more Marines) and Barracks (to recruit Marines faster).
+    \item Attack the enemy base with the Marines.
 \end{enumerate}
 
 \subsection{Action space}
@@ -114,26 +114,26 @@ To limit the action space to a more manageable level and to align with the limit
 \begin{itemize}
     \item \textbf{\texttt{NO\_OP:}} No action is taken for the current step.
     \item \textbf{\texttt{HARVEST\_MINERALS:}} Order a random idle worker to gather minerals from the closes mineral deposit.
-    \item \textbf{\texttt{BUILD\_COMMAND\_CENTER:}} Order a random idle or harvesting worker to build a command center. The agent can only have up to three command centers.
-    \item \textbf{\texttt{RECRUIT\_SCV\_0:}} Recruit an SCV on the first command center.
-    \item \textbf{\texttt{RECRUIT\_SCV\_1:}} Recruit an SCV on the second command center.
-    \item \textbf{\texttt{RECRUIT\_SCV\_2:}} Recruit an SCV on the third command center.
-    \item \textbf{\texttt{BUILD\_SUPPLY\_DEPOT:}} Order a random idle or harvesting worker to build a supply depot. The agent can only have up to 24 supply depots.
-    \item \textbf{\texttt{BUILD\_BARRACKS:}} Order a random idle or harvesting worker to build a barracks. The agent can only have up to four barracks.
-    \item \textbf{\texttt{RECRUIT\_MARINE:}} Recruit a marine on the barracks with the shortest queue.
-    \item \textbf{\texttt{ATTACK\_CLOSEST\_BUILDING:}} Attack with all marines to the enemy building that is closest to the average position of all marines.
-    \item \textbf{\texttt{ATTACK\_CLOSEST\_WORKER:}} Attack with all marines to the enemy worker that is closest to the average position of all marines.
-    \item \textbf{\texttt{ATTACK\_CLOSEST\_ARMY:}} Attack with all marines to the enemy combat unit that is closest to the average position of all marines.
-    \item \textbf{\texttt{ATTACK\_BUILDINGS:}} Attack with all marines to the enemy building that is closest to the average position of all enemy buildings.
-    \item \textbf{\texttt{ATTACK\_WORKERS:}} Attack with all marines to the enemy worker that is closest to the average position of all enemy workers.
-    \item \textbf{\texttt{ATTACK\_ARMY:}} Attack with all marines to the enemy combat unit that is closest to the average position of all enemy combat units.
+    \item \textbf{\texttt{BUILD\_COMMAND\_CENTER:}} Order a random idle or harvesting worker to build a Command Center. The agent can only have up to three Command Centers.
+    \item \textbf{\texttt{RECRUIT\_SCV\_0:}} Recruit an SCV on the first Command Center.
+    \item \textbf{\texttt{RECRUIT\_SCV\_1:}} Recruit an SCV on the second Command Center.
+    \item \textbf{\texttt{RECRUIT\_SCV\_2:}} Recruit an SCV on the third Command Center.
+    \item \textbf{\texttt{BUILD\_SUPPLY\_DEPOT:}} Order a random idle or harvesting worker to build a Supply Depot. The agent can only have up to 24 Supply Depots.
+    \item \textbf{\texttt{BUILD\_BARRACKS:}} Order a random idle or harvesting worker to build a Barracks. The agent can only have up to four Barracks.
+    \item \textbf{\texttt{RECRUIT\_MARINE:}} Recruit a Marine on the Barracks with the shortest queue.
+    \item \textbf{\texttt{ATTACK\_CLOSEST\_BUILDING:}} Attack with all Marines to the enemy building that is closest to the average position of all Marines.
+    \item \textbf{\texttt{ATTACK\_CLOSEST\_WORKER:}} Attack with all Marines to the enemy worker that is closest to the average position of all Marines.
+    \item \textbf{\texttt{ATTACK\_CLOSEST\_ARMY:}} Attack with all Marines to the enemy combat unit that is closest to the average position of all Marines.
+    \item \textbf{\texttt{ATTACK\_BUILDINGS:}} Attack with all Marines to the enemy building that is closest to the average position of all enemy buildings.
+    \item \textbf{\texttt{ATTACK\_WORKERS:}} Attack with all Marines to the enemy worker that is closest to the average position of all enemy workers.
+    \item \textbf{\texttt{ATTACK\_ARMY:}} Attack with all Marines to the enemy combat unit that is closest to the average position of all enemy combat units.
 \end{itemize}
 
-For all building types, we have predefined all the position where they can be built for each map. The versus map we will use only supports up to two additional bases, which is why we limit the command centers to three (including the one each player starts with). The supply depots are limited to 24 since that is the amount that will bring the supply resource to its maximum. Any supply depot beyond the 24\textsuperscript{th} will have no effect. The limit of four barracks is somewhat arbitrary. Four is enough to build marines at a sufficient speed to win the game.
+For all building types, we have predefined all the position where they can be built for each map. The versus map we will use only supports up to two additional bases, which is why we limit the Command Centers to three (including the one each player starts with). The Supply Depots are limited to 24 since that is the amount that will bring the supply resource to its maximum of 200. Any Supply Depot beyond the 24\textsuperscript{th} will have no effect. The limit of four Barracks is somewhat arbitrary. Four is enough to build Marines at a sufficient speed to win the game.
 
-When it comes to recruiting new units, we have allowed the agent to choose in which of its command centers to build the SCVs. Because assigning too many workers to harvest on the same mineral patch has diminishing returns, and since the harvest order always points the selected worker to the closest mineral deposit, this give the agent a certain amount of control on which of the bases' resource economy to develop.
+When it comes to recruiting new units, we have allowed the agent to choose in which of its Command Centers to build the SCVs. Because assigning too many workers to harvest on the same mineral patch has diminishing returns, and since the harvest order always points the selected worker to the closest mineral deposit, this give the agent a certain amount of control on which of the bases' resource economy to develop.
 
-As for the marines, all barracks are built next to the main base and close to each other, so there is no point in differentiating between them.
+As for the Marines, all Barracks are built next to the main base and close to each other, so there is no point in differentiating between them.
 
 \subsection{Observation}
 
@@ -142,9 +142,9 @@ Even though the structured observation provided by PySC2 has a predictable form,
 \begin{itemize}
     \item The amount of resources the agent has.
     \item The number of each building type the agent has.
-    \item The number of workers and marines the agent has.
-    \item The number of workers that are idle, building or harvesting and each command center.
-    \item The distance from the marines to various targets.
+    \item The number of workers and Marines the agent has.
+    \item The number of workers that are idle, building or harvesting and each Command Center.
+    \item The distance from the Marines to various targets.
     \item The list of actions the agent can successfully take on the current step.
     \item The enemy's total army health.
 \end{itemize}
@@ -162,23 +162,23 @@ We found that the mini-games distributed with PySC2 didn't fit with the needs an
 
 \subsubsection*{\texttt{BuildMarinesRandom}}
 
-The objective of this mini-game is to recruit as many marines as possible in a limited time-frame. The agent start with one command center and 16 SCVs next to a mineral patch. Additionally, to favour the exploration process, the scenario can randomly start with one supply depot already built, or one supply depot and one to four barracks already built. The more advanced the starting base, the less likely it is.
+The objective of this mini-game is to recruit as many Marines as possible in a limited time-frame. The agent start with one Command Center and 16 SCVs next to a mineral patch. Additionally, to favour the exploration process, the scenario can randomly start with one Supply Depot already built, or one Supply Depot and one to four Barracks already built. The more advanced the starting base, the less likely it is.
 
-The map has a fixed duration of 10 minutes. The score for each step is the amount of minerals spent on recruiting marines since the last step. The agent has to build supply depots, barracks and marines in the most optimal way possible to maximize the score.
+The map has a fixed duration of 10 minutes. The score for each step is the amount of minerals spent on recruiting Marines since the last step. The agent has to build Supply Depots, Barracks and Marines in the most optimal way possible to maximize the score.
 
 $$
-r(t) = \texttt{spending\_marines}_{t} - \texttt{spending\_marines}_{t-1}
+r(t) = \texttt{spending\_Marines}_{t} - \texttt{spending\_Marines}_{t-1}
 $$
 
 \subsubsection*{\texttt{BuildMarinesFixed}}
 
-This map is identical to \texttt{BuildMarinesRandom} except that it always start with only the command center and the SVCs. It is used for inference purposes.
+This map is identical to \texttt{BuildMarinesRandom} except that it always start with only the Command Center and the SVCs. It is used for inference purposes.
 
 \subsubsection*{\texttt{CollectMineralsRandom}}
 
-The objective of this mini-game is to harvest as many minerals as possible in a limited time-frame. The agent start with one command center and 16 SCVs next to a mineral patch. The map includes two additional mineral patches to allow for up to two more bases to be built. Additionally, to favour the exploration process, the scenario can randomly start with one or two extra command centers already built. The more starting command centers, the less likely it is.
+The objective of this mini-game is to harvest as many minerals as possible in a limited time-frame. The agent start with one Command Center and 16 SCVs next to a mineral patch. The map includes two additional mineral patches to allow for up to two more bases to be built. Additionally, to favour the exploration process, the scenario can randomly start with one or two extra Command Centers already built. The more starting Command Centers, the less likely it is.
 
-The map has a fixed duration of 12 minutes. The score for each step is the amount of minerals gained or lost since the last step. The agent has to build SCVs, supply depots, and command centers in the most optimal way possible to maximize the score.
+The map has a fixed duration of 12 minutes. The score for each step is the amount of minerals gained or lost since the last step. The agent has to build SCVs, Supply Depots, and Command Centers in the most optimal way possible to maximize the score.
 
 $$
 r(t) = \texttt{minerals}_{t} - \texttt{minerals}_{t-1}
@@ -186,13 +186,13 @@ $$
 
 \subsubsection*{\texttt{CollectMineralsFixed}}
 
-This map is identical to \texttt{CollectMineralsRandom} except that it always start with only one command center and the SVCs. It is used for inference purposes.
+This map is identical to \texttt{CollectMineralsRandom} except that it always start with only one Command Center and the SVCs. It is used for inference purposes.
 
 \subsubsection*{\texttt{DefeatBases}}
 
-The objective of this mini-game is to defeat two small enemy bases. The agent starts with a group of marines of variable size placed a random point close to the center of the map. The enemy bases consist of three supply depots, a small random number of SCVs and a small random number of marines, randomly positioned on opposite corners of the map. The enemy marines are programmed to attack any units that damage nearby buildings and the SCVs are programmed to repair nearby buildings. The number of ally and enemy marines is set up so that the allies can destroy both bases reliably if played correctly.
+The objective of this mini-game is to defeat two small enemy bases. The agent starts with a group of Marines of variable size placed a random point close to the center of the map. The enemy bases consist of three Supply Depots, a small random number of SCVs and a small random number of Marines, randomly positioned on opposite corners of the map. The enemy Marines are programmed to attack any units that damage nearby buildings and the SCVs are programmed to repair nearby buildings. The number of ally and enemy Marines is set up so that the allies can destroy both bases reliably if played correctly.
 
-The map ends when all enemy buildings have been destroyed or after 3 minutes. The score for each step is the change in health score since the last step, with an additional flat penalty each step to encourage faster episodes. The agent has to prioritize targeting enemy marines, then SCVs and then buildings, and to focus on a single base at a time to maximize the score.
+The map ends when all enemy buildings have been destroyed or after 3 minutes. The score for each step is the change in health score since the last step, with an additional flat penalty each step to encourage faster episodes. The agent has to prioritize targeting enemy Marines, then SCVs and then buildings, and to focus on a single base at a time to maximize the score.
 
 $$
 \texttt{health\_score} = \texttt{health\_allies} \cdot 1.1 - \texttt{health\_enemies}
@@ -203,7 +203,7 @@ $$
 
 \subsubsection*{\texttt{Simple64}}
 
-This is the only custom map included in PySC2 that we used without any changes. It is a two-player map, classified as a \say{melee} map instead of a mini-game, meaning the objective is simply to defeat the enemy player. Each player starts, randomly, in one of two opposite corners of a symmetric battlefield with a command center and 12 SCVs next to a mineral patch. This emulates a real game of StarCraft II.
+This is the only custom map included in PySC2 that we used without any changes. It is a two-player map, classified as a \say{melee} map instead of a mini-game, meaning the objective is simply to defeat the enemy player. Each player starts, randomly, in one of two opposite corners of a symmetric battlefield with a Command Center and 12 SCVs next to a mineral patch. This emulates a real game of StarCraft II.
 
 The game ends when one of the player has been defeated (by losing all of their structures). It can also end in a draw if enough time passes with none of the players being able to gather more resources, produce more units or destroy enemy units. The score for each step is the change in a custom player score since the last step. The player score is calculated with the mineral value of all units of that player factored by the health or build progress of the unit.
 
