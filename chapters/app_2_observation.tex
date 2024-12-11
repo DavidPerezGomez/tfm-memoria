@@ -3,96 +3,96 @@
 
 \subsubsection*{Relating to actions}
 \begin{description}
-    \item[\texttt{can\_harvest\_minerals}] $1$ if the agent can take the \texttt{HARVEST\_MINERALS} action, $0$ otherwise.
-    \item[\texttt{can\_recruit\_worker\_0}] $1$ if the agent can take the \texttt{RECRUIT\_SCV\_0} action, $0$ otherwise.
-    \item[\texttt{can\_recruit\_worker\_1}] $1$ if the agent can take the \texttt{RECRUIT\_SCV\_1} action, $0$ otherwise.
-    \item[\texttt{can\_recruit\_worker\_2}] $1$ if the agent can take the \texttt{RECRUIT\_SCV\_2} action, $0$ otherwise.
-    \item[\texttt{can\_build\_supply\_depot}] $1$ if the agent can take the \texttt{BUILD\_SUPPLY\_DEPOT} action, $0$ otherwise.
-    \item[\texttt{can\_build\_command\_center}] $1$ if the agent can take the \texttt{BUILD\_COMMAND\_CENTER} action, $0$ otherwise.
-    \item[\texttt{can\_build\_barracks}] $1$ if the agent can take the \texttt{BUILD\_BARRACKS} action, $0$ otherwise.
-    \item[\texttt{can\_recruit\_marine}] $1$ if the agent can take the \texttt{RECRUIT\_MARINE} action, $0$ otherwise.
-    \item[\texttt{can\_attack\_closest\_buildings}] $1$ if the agent can take the \texttt{ATTACK\_CLOSEST\_BUILDING} action, $0$ otherwise.
-    \item[\texttt{can\_attack\_closest\_workers}] $1$ if the agent can take the \texttt{ATTACK\_CLOSEST\_WORKER} action, $0$ otherwise.
-    \item[\texttt{can\_attack\_closest\_army}] $1$ if the agent can take the \texttt{ATTACK\_CLOSEST\_ARMY} action, $0$ otherwise.
-    \item[\texttt{can\_attack\_buildings}] $1$ if the agent can take the \texttt{ATTACK\_BUILDINGS} action, $0$ otherwise.
-    \item[\texttt{can\_attack\_workers}] $1$ if the agent can take the \texttt{ATTACK\_WORKERS} action, $0$ otherwise.
-    \item[\texttt{can\_attack\_army}] $1$ if the agent can take the \texttt{ATTACK\_ARMY} action, $0$ otherwise.
+    \item[\texttt{can\_harvest\_minerals}] $\in \{0,1\}$. $1$ if the agent can take the \texttt{HARVEST\_MINERALS} action, $0$ otherwise.
+    \item[\texttt{can\_recruit\_worker\_0}] $\in \{0,1\}$. $1$ if the agent can take the \texttt{RECRUIT\_SCV\_0} action, $0$ otherwise.
+    \item[\texttt{can\_recruit\_worker\_1}] $\in \{0,1\}$. $1$ if the agent can take the \texttt{RECRUIT\_SCV\_1} action, $0$ otherwise.
+    \item[\texttt{can\_recruit\_worker\_2}] $\in \{0,1\}$. $1$ if the agent can take the \texttt{RECRUIT\_SCV\_2} action, $0$ otherwise.
+    \item[\texttt{can\_build\_supply\_depot}] $\in \{0,1\}$. $1$ if the agent can take the \texttt{BUILD\_SUPPLY\_DEPOT} action, $0$ otherwise.
+    \item[\texttt{can\_build\_command\_center}] $\in \{0,1\}$. $1$ if the agent can take the \texttt{BUILD\_COMMAND\_CENTER} action, $0$ otherwise.
+    \item[\texttt{can\_build\_barracks}] $\in \{0,1\}$. $1$ if the agent can take the \texttt{BUILD\_BARRACKS} action, $0$ otherwise.
+    \item[\texttt{can\_recruit\_marine}] $\in \{0,1\}$. $1$ if the agent can take the \texttt{RECRUIT\_MARINE} action, $0$ otherwise.
+    \item[\texttt{can\_attack\_closest\_buildings}] $\in \{0,1\}$. $1$ if the agent can take the \texttt{ATTACK\_CLOSEST\_BUILDING} action, $0$ otherwise.
+    \item[\texttt{can\_attack\_closest\_workers}] $\in \{0,1\}$. $1$ if the agent can take the \texttt{ATTACK\_CLOSEST\_WORKER} action, $0$ otherwise.
+    \item[\texttt{can\_attack\_closest\_army}] $\in \{0,1\}$. $1$ if the agent can take the \texttt{ATTACK\_CLOSEST\_ARMY} action, $0$ otherwise.
+    \item[\texttt{can\_attack\_buildings}] $\in \{0,1\}$. $1$ if the agent can take the \texttt{ATTACK\_BUILDINGS} action, $0$ otherwise.
+    \item[\texttt{can\_attack\_workers}] $\in \{0,1\}$. $1$ if the agent can take the \texttt{ATTACK\_WORKERS} action, $0$ otherwise.
+    \item[\texttt{can\_attack\_army}] $\in \{0,1\}$. $1$ if the agent can take the \texttt{ATTACK\_ARMY} action, $0$ otherwise.
 \end{description}
 
 \subsubsection*{Relating to structures}
 \begin{description}
-    \item[\texttt{num\_command\_centers}] Number of Command Centers the agent controls (includes Command Centers being build).
-    \item[\texttt{num\_completed\_command\_centers}] Number of finished Command Centers the agent controls.
-    \item[\texttt{max\_command\_centers}] Maximum number of commands centers the agent can have at a time (as configured for the current map).
-    \item[\texttt{pct\_command\_centers}] Number of Command Centers divided by maximum number of commands centers.
-    \item[\texttt{command\_center\_0\_order\_length}] Number of workers being build in first Command Center.
-    \item[\texttt{command\_center\_0\_num\_workers}] Number of workers harvesting minerals to first Command Center.
-    \item[\texttt{command\_center\_1\_order\_length}] Number of workers being build in second Command Center.
-    \item[\texttt{command\_center\_1\_num\_workers}] Number of workers harvesting minerals to second Command Center.
-    \item[\texttt{command\_center\_2\_order\_length}] Number of workers being build in third Command Center.
-    \item[\texttt{command\_center\_2\_num\_workers}] Number of workers harvesting minerals to third Command Center.
-    \item[\texttt{num\_supply\_depots}] Number of Supply Depots the agent controls (includes Supply Depots being build).
-    \item[\texttt{num\_completed\_supply\_depots}] Number of finished Supply Depots the agent controls.
-    \item[\texttt{max\_supply\_depots}] Maximum number of Supply Depots the agent can have at a time (as configured for the current map).
-    \item[\texttt{pct\_supply\_depots}] Number of Supply Depots divided by maximum number of Supply Depots.
-    \item[\texttt{num\_barracks}] Number of Barracks the agent controls (includes Barracks being build).
-    \item[\texttt{num\_completed\_barracks}] Number of finished Barracks the agent controls.
-    \item[\texttt{max\_barracks}] Maximum number of Barracks the agent can have at a time (as configured for the current map).
-    \item[\texttt{pct\_barracks}] Number of Barracks divided by maximum number of Barracks.
-    \item[\texttt{barracks\_used\_queue\_length}] Number of Marines being build in all Barracks.
-    \item[\texttt{barracks\_free\_queue\_length}] Number of that can be queued to build in all Barracks.
+    \item[\texttt{num\_command\_centers}] $\in \mathbb{N}^+$. Number of Command Centers the agent controls (includes Command Centers being build).
+    \item[\texttt{num\_completed\_command\_centers}] $\in \mathbb{N}^+$. Number of finished Command Centers the agent controls.
+    \item[\texttt{max\_command\_centers}] $\in \mathbb{N}^+$. Maximum number of commands centers the agent can have at a time (as configured for the current map).
+    \item[\texttt{pct\_command\_centers}] $\in [0,1]$ Number of Command Centers divided by maximum number of commands centers.
+    \item[\texttt{command\_center\_0\_order\_length}] $\in \mathbb{N}^+$. Number of workers being build in first Command Center.
+    \item[\texttt{command\_center\_0\_num\_workers}] $\in \mathbb{N}^+$. Number of workers harvesting minerals to first Command Center.
+    \item[\texttt{command\_center\_1\_order\_length}] $\in \mathbb{N}^+$. Number of workers being build in second Command Center.
+    \item[\texttt{command\_center\_1\_num\_workers}] $\in \mathbb{N}^+$. Number of workers harvesting minerals to second Command Center.
+    \item[\texttt{command\_center\_2\_order\_length}] $\in \mathbb{N}^+$. Number of workers being build in third Command Center.
+    \item[\texttt{command\_center\_2\_num\_workers}] $\in \mathbb{N}^+$. Number of workers harvesting minerals to third Command Center.
+    \item[\texttt{num\_supply\_depots}] $\in \mathbb{N}^+$. Number of Supply Depots the agent controls (includes Supply Depots being build).
+    \item[\texttt{num\_completed\_supply\_depots}] $\in \mathbb{N}^+$. Number of finished Supply Depots the agent controls.
+    \item[\texttt{max\_supply\_depots}] $\in \mathbb{N}^+$. Maximum number of Supply Depots the agent can have at a time (as configured for the current map).
+    \item[\texttt{pct\_supply\_depots}] $\in [0,1]$. Number of Supply Depots divided by maximum number of Supply Depots.
+    \item[\texttt{num\_barracks}] $\in \mathbb{N}^+$. Number of Barracks the agent controls (includes Barracks being build).
+    \item[\texttt{num\_completed\_barracks}] $\in \mathbb{N}^+$. Number of finished Barracks the agent controls.
+    \item[\texttt{max\_barracks}] $\in \mathbb{N}^+$. Maximum number of Barracks the agent can have at a time (as configured for the current map).
+    \item[\texttt{pct\_barracks}] $\in [0,1]$. Number of Barracks divided by maximum number of Barracks.
+    \item[\texttt{barracks\_used\_queue\_length}] $\in \mathbb{N}^+$. Number of Marines being build in all Barracks.
+    \item[\texttt{barracks\_free\_queue\_length}] $\in \mathbb{N}^+$. Number of that can be queued to build in all Barracks.
 \end{description}
 
 \subsubsection*{Relating to units}
 \begin{description}
-    \item[\texttt{num\_workers}] Number of worker units the agent controls.
-    \item[\texttt{num\_idle\_workers}] Number of workers that are idle.
-    \item[\texttt{pct\_idle\_workers}] Ratio of workers that are idle.
-    \item[\texttt{num\_mineral\_harvesters}] Number of workers that are harvesting minerals.
-    \item[\texttt{pct\_mineral\_harvesters}] Ratio of workers that are harvesting minerals.
-    \item[\texttt{num\_marines}] Number of Marines the agent controls.
-    \item[\texttt{num\_idle\_marines}] Number of Marines that are idle.
-    \item[\texttt{pct\_idle\_marines}] Ratio of Marines that are idle.
-    \item[\texttt{total\_army\_health}] Total health of all Marines.
-    \item[\texttt{dist\_marine\_avg\_to\_army\_avg}] Distance from average position of all Marines to average position of all enemy Marines.
-    \item[\texttt{dist\_marine\_avg\_to\_worker\_avg}] Distance from average position of all Marines to average position of all enemy workers.
-    \item[\texttt{dist\_marine\_avg\_to\_building\_avg}] Distance from average position of all Marines to average position of all enemy structures.
-    \item[\texttt{dist\_marine\_avg\_to\_closest\_army}] Shortest distance from average position of all Marines to any enemy Marine.
-    \item[\texttt{dist\_marine\_avg\_to\_closest\_worker}] Shortest distance from average position of all Marines to any enemy worker.
-    \item[\texttt{dist\_marine\_avg\_to\_closest\_building}] Shortest distance from average position of all Marines to any enemy structure.
+    \item[\texttt{num\_workers}] $\in \mathbb{N}^+$. Number of worker units the agent controls.
+    \item[\texttt{num\_idle\_workers}] $\in \mathbb{N}^+$. Number of workers that are idle.
+    \item[\texttt{pct\_idle\_workers}] $\in [0,1]$. Ratio of workers that are idle.
+    \item[\texttt{num\_mineral\_harvesters}] $\in \mathbb{N}^+$. Number of workers that are harvesting minerals.
+    \item[\texttt{pct\_mineral\_harvesters}] $\in [0,1]$. Ratio of workers that are harvesting minerals.
+    \item[\texttt{num\_marines}] $\in \mathbb{N}^+$. Number of Marines the agent controls.
+    \item[\texttt{num\_idle\_marines}] $\in \mathbb{N}^+$. Number of Marines that are idle.
+    \item[\texttt{pct\_idle\_marines}] $\in [0,1]$. Ratio of Marines that are idle.
+    \item[\texttt{total\_army\_health}] $\in \mathbb{N}^+$. Total health of all Marines.
+    \item[\texttt{dist\_marine\_avg\_to\_army\_avg}] $\in \mathbb{R}^+$. Distance from average position of all Marines to average position of all enemy Marines.
+    \item[\texttt{dist\_marine\_avg\_to\_worker\_avg}] $\in \mathbb{R}^+$. Distance from average position of all Marines to average position of all enemy workers.
+    \item[\texttt{dist\_marine\_avg\_to\_building\_avg}] $\in \mathbb{R}^+$. Distance from average position of all Marines to average position of all enemy structures.
+    \item[\texttt{dist\_marine\_avg\_to\_closest\_army}] $\in \mathbb{R}^+$. Shortest distance from average position of all Marines to any enemy Marine.
+    \item[\texttt{dist\_marine\_avg\_to\_closest\_worker}] $\in \mathbb{R}^+$. Shortest distance from average position of all Marines to any enemy worker.
+    \item[\texttt{dist\_marine\_avg\_to\_closest\_building}] $\in \mathbb{R}^+$. Shortest distance from average position of all Marines to any enemy structure.
 \end{description}
 
 \subsubsection*{Relating to resources}
 \begin{description}
-    \item[\texttt{free\_supply}] Available supply resource.
-    \item[\texttt{minerals}] Mineral resource count.
-    \item[\texttt{collection\_rate\_minerals}] Mineral collection rate in minerals per second.
+    \item[\texttt{free\_supply}] $\in \mathbb{N}^+$. Available supply resource.
+    \item[\texttt{minerals}] $\in \mathbb{N}^+$. Mineral resource count.
+    \item[\texttt{collection\_rate\_minerals}] $\in \mathbb{N}^+$. Mineral collection rate in minerals per second.
 \end{description}
 
 \subsubsection*{Relating to score}
 \begin{description}
-    \item[\texttt{score\_cumulative\_score}] Game-calculated overall score.
-    \item[\texttt{score\_cumulative\_total\_value\_units}] Mineral value of all units owned.
-    \item[\texttt{score\_cumulative\_total\_value\_structures}] Mineral value of all structures owned.
-    \item[\texttt{score\_cumulative\_killed\_value\_units}] Mineral value of all units killed.
-    \item[\texttt{score\_cumulative\_killed\_value\_structures}] Mineral value of all structures destroyed.
-    \item[\texttt{score\_food\_used\_army}] Total supply used in army units (marines).
-    \item[\texttt{score\_food\_used\_economy}] Total supply used in economy units (workers).
-    \item[\texttt{score\_used\_minerals\_army}] Total minerals used in army units (marines).
-    \item[\texttt{score\_used\_minerals\_economy}] Total minerals used in economy units and structures (command centers, workers and Supply Depots).
-    \item[\texttt{score\_used\_minerals\_technology}] Total minerals used in technology structures (barracks).
-    \item[\texttt{damage\_dealt\_delta}] Damage dealt since last observation.
-    \item[\texttt{damage\_taken\_delta}] Damage received since last observation.
+    \item[\texttt{score\_cumulative\_score}] $\in \mathbb{N}^+$. Game-calculated overall score.
+    \item[\texttt{score\_cumulative\_total\_value\_units}] $\in \mathbb{N}^+$. Mineral value of all units owned.
+    \item[\texttt{score\_cumulative\_total\_value\_structures}] $\in \mathbb{N}^+$. Mineral value of all structures owned.
+    \item[\texttt{score\_cumulative\_killed\_value\_units}] $\in \mathbb{N}^+$. Mineral value of all units killed.
+    \item[\texttt{score\_cumulative\_killed\_value\_structures}] $\in \mathbb{N}^+$. Mineral value of all structures destroyed.
+    \item[\texttt{score\_food\_used\_army}] $\in \mathbb{N}^+$. Total supply used in army units (Marines).
+    \item[\texttt{score\_food\_used\_economy}] $\in \mathbb{N}^+$. Total supply used in economy units (SCVs).
+    \item[\texttt{score\_used\_minerals\_army}] $\in \mathbb{N}^+$. Total minerals used in army units (Marines).
+    \item[\texttt{score\_used\_minerals\_economy}] $\in \mathbb{N}^+$. Total minerals used in economy units and structures (Command Centers, SCVs and Supply Depots).
+    \item[\texttt{score\_used\_minerals\_technology}] $\in \mathbb{N}^+$. Total minerals used in technology structures (Barracks).
+    \item[\texttt{damage\_dealt\_delta}] $\in \mathbb{N}^+$. Damage dealt since last observation.
+    \item[\texttt{damage\_taken\_delta}] $\in \mathbb{N}^+$. Damage received since last observation.
 \end{description}
 
 \subsubsection*{Relating to neural units}
 \begin{description}
-    \item[\texttt{num\_minerals}] Number of mineral deposits in the map.
+    \item[\texttt{num\_minerals}] $\in \mathbb{N}^+$. Number of mineral deposits in the map.
 \end{description}
 
 \subsubsection*{Relating to enemy units}
 \begin{description}
-    \item[\texttt{enemy\_total\_building\_health}] Total health of enemy buildings.
-    \item[\texttt{enemy\_total\_worker\_health}] Total health of enemy workers.
-    \item[\texttt{enemy\_total\_army\_health}] Total health of enemy Marines.
+    \item[\texttt{enemy\_total\_building\_health}] $\in \mathbb{N}^+$. Total health of enemy buildings.
+    \item[\texttt{enemy\_total\_worker\_health}] $\in \mathbb{N}^+$. Total health of enemy workers.
+    \item[\texttt{enemy\_total\_army\_health}] $\in \mathbb{N}^+$. Total health of enemy Marines.
 \end{description}
