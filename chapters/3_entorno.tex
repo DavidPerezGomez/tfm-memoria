@@ -11,6 +11,33 @@ StarCraft II is played on a mostly flat map with an isometric or birds-eye view.
 
 The game also supports user-created maps and is distributed alongside a map editor with extensive tools to create, edit and script custom maps.
 
+\subsection{Game details}
+
+As mentioned, the way the game is played is to collect resources and use those to build structures and units which, in turn, can be used to defeat the opponent. Here we describe these three core elements in more detail to provide the context necessary for the rest of the chapter. Figure \ref{fig:sc2_screenshot} shows a basic Terran base.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{figs/SC2_basic_elements.png}
+    \caption[Basic elements of StarCraft II]{Basic elements of StarCraft II: (1) mineral deposits, (2) vespene gas geyser, (3) resource tracker (minerals, vespene, suppy), (4) Command Center, (5) Refinery, (6) Supply Depots, (7) Barracks, (8) SCVs (workers), (9) Marines (combat units), (10) unit queue, (11) minimap.}
+    \label{fig:sc2_screenshot}
+\end{figure}
+
+\subsubsection{Resources}
+
+There are three types of resources in StarCraft II: minerals, vespene gas and supply. Both minerals and vespene need to be collected from specific points in the map (mineral deposits and vespene geysers respectively) by sending worker units to collect the resource and bring it back to the closest town hall (the central structure of a base). In addition, to be able to collect vespene gas from a geyser, it is necessary to first build a specific structure on it (for example, the Terran's Refinery).
+
+Minerals are used by all races to build and recruit most of their structures and units. Vespene gas is used in a similar way except that it is usually reserved for slightly more advanced structures and units.
+
+Supply is different from the other two resources in several ways. First, it is not gathered from the map, but instead is earned by controlling certain structures or units, which vary depending on the race, and maxes out at 200. In the case of Terrans, for example, Command Centers provide 15 supply and Supply Depots provide 8. If any of the structures is destroyed, the supply will decrease accordingly. Second, unlike minerals and vespene, supply is not spent, simply allocated. Every unit type has a corresponding supply cost (usually 1 for basic units), and when a unit is created, it \say{occupies} that much supply, which is freed when the unit dies. Supply, then, limits how big a player's army can be.
+
+\subsubsection{Structures and units}
+
+Structures are stationary buildings from which units are created and upgrades are researched. The exact structures and their functions change from one race to another. All races have a main type of building referred to as a town hall (the Command Center for Terrans, for example) that serves as the central structure for a base by creating workers and receiving the minerals and vespene gas they harvest. In addition to the mineral and vespene cost that a structure might have, they also require a certain amount of time to build. Structures are not operable until their construction is finished.
+
+As far as units go, they can be broadly placed in two categories: workers and combat units. Workers have the ability to build structures and gather resources while combat units are designed to damage enemy units and structures. Workers behave in a similar manner for all three races, whereas combat units are a lot more diverse. Similarly to structures, each unit type also takes a certain amount of time to train, on top of the mineral, vespene and supply cost. A single structure can only train one unit at a time, but up to five units can be queued (paying the mineral and vespene cost in advance) so that they begin training as soon as the previous one is completed.
+
+In a typical game of StarCraft II, each player begins with one town hall and eight workers placed next to several mineral deposits and two vespene geysers, as seen in figure \ref{fig:sc2_screenshot}.
+
 \section{PySC2 library}
 
 PySC2 is a python library developed by the Google Deep Mind team in collaboration with Blizzard \cite{Vinyals:2017}. It wraps the StarCraft II API and provides specifications for agent actions and environment observations, as well as a reward signal, which allow the use of the game as a reinforcement learning environment.
