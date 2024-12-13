@@ -13,7 +13,7 @@ The game also supports user-created maps and is distributed alongside a map edit
 
 \subsection{Game details}
 
-As mentioned, the way the game is played is to collect resources and use those to build structures and units which, in turn, can be used to defeat the opponent. Here we describe these three core elements in more detail to provide the context necessary for the rest of the chapter. Figure \ref{fig:sc2_screenshot} shows a basic Terran base.
+As mentioned, the way the game is played is to collect resources and use those to build structures and units which, in turn, can be used to defeat the opponent. Here we describe these three core elements in more detail to provide the context necessary for the rest of the chapter. For a visual reference, figure \ref{fig:sc2_screenshot} shows a basic Terran base.
 
 \begin{figure}[h]
     \centering
@@ -36,7 +36,7 @@ Structures are stationary buildings from which units are created and upgrades ar
 
 As far as units go, they can be broadly placed in two categories: workers and combat units. Workers have the ability to build structures and gather resources while combat units are designed to damage enemy units and structures. Workers behave in a similar manner for all three races, whereas combat units are a lot more diverse. Similarly to structures, each unit type also takes a certain amount of time to train, on top of the mineral, vespene and supply cost. A single structure can only train one unit at a time, but up to five units can be queued (paying the mineral and vespene cost in advance) so that they begin training as soon as the previous one is completed.
 
-In a typical game of StarCraft II, each player begins with one town hall and eight workers placed next to several mineral deposits and two vespene geysers, as seen in figure \ref{fig:sc2_screenshot}.
+In a typical game of StarCraft II, each player begins with one town hall and twelve workers placed next to several mineral deposits and two vespene geysers, as seen in figure \ref{fig:sc2_screenshot}.
 
 \section{PySC2 library}
 
@@ -87,7 +87,7 @@ Taking this into account, we have chosen the Terrans as the race to focus on sin
 
 \begin{itemize}
     \item \textbf{Command Center:} Town hall for the Terran Race. It can recruit SCVs and is necessary to collect minerals and vespene. Every player begins the game with one Command Center next to a patch of mineral crystals. Costs 400 minerals and takes 71 seconds to build.
-    \item \textbf{SCV:} Worker unit used to build all Terran structures and to collect minerals and vespene and take them to the closest Command Center. It has limited combat abilities, but we won't make use of them for the sake of simplicity. Every player begins the game with eight SCVs. Costs 50 minerals and 1 supply, and takes 12 seconds to train.
+    \item \textbf{SCV:} Worker unit used to build all Terran structures and to collect minerals and vespene and take them to the closest Command Center. It has limited combat abilities, but we won't make use of them for the sake of simplicity. Every player begins the game with twelve SCVs. Costs 50 minerals and 1 supply, and takes 12 seconds to train.
     \item \textbf{Supply Depot:} Structure that increases the maximum supply of the player, which determines the amount of units the player can have at the same time. At least one Supply Depot is required to build a Barracks. Costs 100 minerals and takes 21 seconds to build.
     \item \textbf{Barracks:} Structure used to recruit new Marines. Costs 150 minerals and takes 46 seconds to build.
     \item \textbf{Marine:} Ranged combat unit capable of attacking and destroying enemy units and structures. It cannot harvest resources or build structures. Costs 50 minerals and takes 25 seconds to train.
