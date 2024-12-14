@@ -5,7 +5,7 @@ In this chapter, we introduce the basic elements and concepts of reinforcement l
 
 \section{Introduction to reinforcement learning}
 
-Reinforcement learning (RL) is a form of machine learning that can be described as \say{a way of programming agents by reward and punishment without needing to specify how the task is to be achieved} \cite{Kaelbling:1996}. The goal of reinforcement learning is to produce and agent capable of solving a particular problem within an environment. However, the agent has no initial knowledge of the task that it must complete or the effect that its actions have. Instead, it must learn through trial and error by interacting with the environment.
+Reinforcement learning (RL) is a form of machine learning that can be described as \say{a way of programming agents by reward and punishment without needing to specify how the task is to be achieved} \cite{Kaelbling:1996}. The goal of reinforcement learning is to produce an agent capable of solving a particular problem within an environment. However, the agent has no initial knowledge of the task that it must complete or the effect that its actions have. Instead, it must learn through trial and error by interacting with the environment.
 
 \subsection{Elements}
 
@@ -32,7 +32,7 @@ These elements are described in greater detail below.
 The environment encompasses all that is external to the agent. The agent learns by interacting with the environment in a series of discreet instants, or time steps, as depicted in figure \ref{fig:interaction}. On any given step $t$, the agent:
 
 \begin{enumerate}
-    \item receives and observation of the environment $O_t$,
+    \item receives an observation of the environment $O_t$,
     \item receives a reward $R_t$ based on the current state of the environment, and
     \item executes an action $A_t$.
 \end{enumerate}

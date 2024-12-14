@@ -42,7 +42,7 @@ In a typical game of StarCraft II, each player begins with one town hall and twe
 
 PySC2 is a python library developed by the Google Deep Mind team in collaboration with Blizzard \cite{Vinyals:2017}. It wraps the StarCraft II API and provides specifications for agent actions and environment observations, as well as a reward signal, which allow the use of the game as a reinforcement learning environment.
 
-One of the major benefits of this library is that it can run the game tens of times faster than regular game-play. Internally, the game runs at 16 ticks per in-game second. When running the game at normal speed an in-game second matches a real-life second. PySC2 can run the game at much faster speeds, and we can configure how often (in terms of game ticks) it will stop the simulation, provide an observation and wait until our agent selects an action. For example, by setting the configuration value \texttt{step\_mul} to 32, PySC2 will poll our agent every 32 game ticks, which means the agent will act once every two in-game seconds.
+One of the major benefits of this library is that it can run the game tens of times faster than regular gameplay. Internally, the game runs at 16 ticks per in-game second. When running the game at normal speed an in-game second matches a real-life second. PySC2 can run the game at much faster speeds, and we can configure how often (in terms of game ticks) it will stop the simulation, provide an observation and wait until our agent selects an action. For example, by setting the configuration value \texttt{step\_mul} to 32, PySC2 will poll our agent every 32 game ticks, which means the agent will act once every two in-game seconds.
 
 \subsubsection*{Observation}
 
@@ -59,7 +59,7 @@ Additionally, the agents also have access to structured data about the state of 
 
 \subsubsection*{Action space}
 
-PySC2 allows the agents to interact with the game by calling functions that represent game actions that a regular player could take. These functions come in two forms. One type of function mimics the way a player would interact with the game, mostly by clicking the game area or the mini-map or pressing hot-keys. This includes clicking on the screen to select a unit, dragging a rectangle to select multiple units, clicking again to issue and order to move or attack, dragging the mouse to move the camera, etc.
+PySC2 allows the agents to interact with the game by calling functions that represent game actions that a regular player could take. These functions come in two forms. One type of function mimics the way a player would interact with the game, mostly by clicking the game area or the mini-map or pressing hot-keys. This includes clicking on the screen to select a unit, dragging a rectangle to select multiple units, clicking again to issue an order to move or attack, dragging the mouse to move the camera, etc.
 
 The second type of function, called \say{raw function}, encodes higher level actions, such as attacking a specific point with one or more units, building a structure with a specific worker or sending a worker to gather resources. With these, the agent doesn't need to select units before giving the command, or move the camera to be able to see the area where it wants to build or attack. The library handles all the low level \say{basic} actions related to game-control that would combine to form a \say{raw function}.
 
@@ -71,7 +71,7 @@ For that reason, a second, dense reward is also included. This reward matches th
 
 \subsection{Mini-games}
 
-PySC2 comes with a selection of mini-games, created with the StarCraft II map editor, to serve as small environments with simpler objectives. These maps often have different reward signal to better match the goal of each mini-games.
+PySC2 comes with a selection of mini-games, created with the StarCraft II map editor, to serve as small environments with simpler objectives. These maps often have different reward signal to better match the goal of each mini-game.
 
 \section{Simplified environment}
 
@@ -87,7 +87,7 @@ Taking this into account, we have chosen the Terrans as the race to focus on sin
 
 \begin{itemize}
     \item \textbf{Command Center:} Town hall for the Terran Race. It can recruit SCVs and is necessary to collect minerals and vespene. Every player begins the game with one Command Center next to a patch of mineral crystals. Costs 400 minerals and takes 71 seconds to build.
-    \item \textbf{SCV:} Worker unit used to build all Terran structures and to collect minerals and vespene and take them to the closest Command Center. It has limited combat abilities, but we won't make use of them for the sake of simplicity. Every player begins the game with twelve SCVs. Costs 50 minerals and 1 supply, and takes 12 seconds to train.
+    \item \textbf{SCV:} Worker unit used to build all Terran structures and to collect minerals and vespene and take them to the closest Command Center. It has limited combat abilities, but we won't make use of them for the sake of simplicity. Every player begins the game with 12 SCVs. Costs 50 minerals and 1 supply, and takes 12 seconds to train.
     \item \textbf{Supply Depot:} Structure that increases the maximum supply of the player, which determines the amount of units the player can have at the same time. At least one Supply Depot is required to build a Barracks. Costs 100 minerals and takes 21 seconds to build.
     \item \textbf{Barracks:} Structure used to recruit new Marines. Costs 150 minerals and takes 46 seconds to build.
     \item \textbf{Marine:} Ranged combat unit capable of attacking and destroying enemy units and structures. It cannot harvest resources or build structures. Costs 50 minerals and takes 25 seconds to train.
