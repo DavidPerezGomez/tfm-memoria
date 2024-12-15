@@ -1,5 +1,6 @@
 .vscode/
 *.pdf
+!DavidPerezGomez_Memoria.pdf
 *.out
 *.aux
 *.bbl
@@ -9,7 +10,7 @@
 *.fls
 *.lof
 *.log
-*.log
+*.lot
 *.xml
 *.gz
 *.toc
