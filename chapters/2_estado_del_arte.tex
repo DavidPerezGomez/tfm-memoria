@@ -22,7 +22,7 @@ These elements are described in greater detail below.
 
 \subsubsection{Environment}
 
-\begin{figure}[!h]
+\begin{figure}[t]
     \centering
     \includegraphics[width=.5\textwidth]{figs/RL_schema.png}
     \caption{Agent-Environment interaction}
@@ -269,6 +269,7 @@ Q-Learning \cite{Watkins:1992} is a common control algorithm for approximating t
 In this formula, the term $R_{t+1} + \gamma \max_a Q(S_{t+1},a) - Q(S_t,A_t)$ is called the \textit{temporal difference error} (TD error, $\delta_t$) and represents the difference between the current estimation of $Q(S_t,A_t)$ and the new estimation after step $t$ (also known as target).
 
 \subsection{Deep Q-Learning}
+\label{sec:dql}
 
 A problem of the Q-Learning algorithm is that the estimator function $Q$ acts as a table that holds the approximated value of $q_\ast$ for every combination of state and action, meaning that, for an environment with $m$ possible states and $n$ actions, the size of the table would be $m \times n$. 
 
@@ -306,6 +307,7 @@ Another problem in DQL is that the target value of the network is constantly cha
 Algorithm \ref{alg:dqn2} shows what Deep Q-Learning looks like after the aforementioned techniques are implemented \cite{Mnih:2015}.
 
 \section{Hierarchical reinforcement learning}
+\label{sec:hrl}
 
 Hierarchical reinforcement learning (HRL) is the strategy of dividing the main problem into several sub-problems, which are then learned by a hierarchy of agents trained by reinforcement learning \cite{Barto:2003, Al-Emran:2015, Pateria:2021}. There are different strategies on how to implement the hierarchy (feudal \cite{Vezhnevets:2017}, MAXQ \cite{Dietterich:1999}, etc.) but in this project, we will focus on the one usually referred to as \textit{options} \cite{Sutton:2018}. In this methodology, the main task is divided manually into any number of subtasks, which usually correspond with higher-level concepts. Each subtask is treated as a RL problem by itself, and an agent is trained for each of them, sometimes receiving rewards specific to the subtask rather than the entire environment \cite{Pateria:2021}. These are the low-level agents in the hierarchy, which take the basic actions available in the environment to interact with it. Above them, a higher-level agent is trained to perform the main task as a sequence of subtasks, and uses its action to select which subtask (which low-level agent) to follow at any point in time. Depending on the complexity of the problem, this hierarchy may have an arbitrary number of abstraction layers.
 

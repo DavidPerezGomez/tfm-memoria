@@ -5,7 +5,7 @@ In this chapter, we describe de characteristics of StarCraft II as a reinforceme
 
 \section{StarCraft II}
 
-StarCraft II is a real-time strategy video-game developed by Blizzard Entertainment, Inc in 2010. The game was extremely successful with the casual audience and it spawned a professional competition scene that continues to this day. In the field of machine learning, StarCraft II was first explored in 2017 \cite{Vinyals:2017} and it has since become a frequently tackled game thanks to its complexity and the wide range of challenges that it provides \cite{Tang:2018}.
+StarCraft II is a real-time strategy video-game developed by Blizzard Entertainment, Inc. in 2010. The game was extremely successful with the casual audience and it spawned a professional competition scene that continues to this day. In the field of machine learning, StarCraft II was first explored in 2017 \cite{Vinyals:2017} and it has since become a frequently tackled game thanks to its complexity and the wide range of challenges that it provides \cite{Tang:2018}.
 
 StarCraft II is played on a mostly flat map with an isometric or birds-eye view. The main game-mode is versus, in which two or more players fight against each other until all but one of the players (or teams) are defeated. Each player needs to collect resources from the map, build structures and recruit and upgrade their army to attack other players and defend themselves. A player is defeated when all their structures have been destroyed. There are three playable races for the players to choose (Terran, Protoss and Zerg), each with their own unique units, structures, upgrade trees and game mechanics.
 
@@ -15,7 +15,7 @@ The game also supports user-created maps and is distributed alongside a map edit
 
 As mentioned, the way the game is played is to collect resources and use those to build structures and units which, in turn, can be used to defeat the opponent. Here we describe these three core elements in more detail to provide the context necessary for the rest of the chapter. For a visual reference, figure \ref{fig:sc2_screenshot} shows a basic Terran base.
 
-\begin{figure}[h]
+\begin{figure}[t]
     \centering
     \includegraphics[width=1\textwidth]{figs/SC2_basic_elements.png}
     \caption[Basic elements of StarCraft II]{Basic elements of StarCraft II: (1) mineral deposits, (2) vespene gas geyser, (3) resource tracker (minerals, vespene, suppy), (4) Command Center, (5) Refinery, (6) Supply Depots, (7) Barracks, (8) SCVs (workers), (9) Marines (combat units), (10) unit queue, (11) minimap.}
@@ -39,6 +39,7 @@ As far as units go, they can be broadly placed in two categories: workers and co
 In a typical game of StarCraft II, each player begins with one town hall and twelve workers placed next to several mineral deposits and two vespene geysers, as seen in figure \ref{fig:sc2_screenshot}.
 
 \section{PySC2 library}
+\label{sec:pysc2}
 
 PySC2 is a python library developed by the Google Deep Mind team in collaboration with Blizzard \cite{Vinyals:2017}. It wraps the StarCraft II API and provides specifications for agent actions and environment observations, as well as a reward signal, which allow the use of the game as a reinforcement learning environment.
 
@@ -50,7 +51,7 @@ Every step, PySC2 supplies all the information about the current state of the ga
 
 Additionally, the agents also have access to structured data about the state of the game, in the form of several tensors. These tensors contain numerical information about the players, resources and units in the map, as well as accumulated data such as total damage dealt or total resources spent.
 
-\begin{figure}[h]
+\begin{figure}[t]
     \centering
     \includegraphics[width=1\textwidth]{figs/feature_layers.png}
     \caption{PySC2 feature layer view}
@@ -64,6 +65,7 @@ PySC2 allows the agents to interact with the game by calling functions that repr
 The second type of function, called \say{raw function}, encodes higher level actions, such as attacking a specific point with one or more units, building a structure with a specific worker or sending a worker to gather resources. With these, the agent doesn't need to select units before giving the command, or move the camera to be able to see the area where it wants to build or attack. The library handles all the low level \say{basic} actions related to game-control that would combine to form a \say{raw function}.
 
 \subsubsection*{Reward signal}
+\label{sec:reward_signal}
 
 For each observation in a standard versus map, PySC2 provides two different rewards. One simply reflects the win or lose status at the end of a game: 1 for victory, -1 for defeat and 0 for draw (in case of a time-out). Every step during the game before the end of the match has a reward of 0. While this reward matches the desired behavior of the agents (we simply care about winning and not losing) it can be too sparse for the agents to properly learn, since the only receive one instance of reward after every game, which can easily take hundreds or thousands of steps.
 
@@ -112,21 +114,21 @@ These units, although limited for a normal game of StarCraft II, are enough for 
 To limit the action space to a more manageable level and to align with the limited progression described previously, we have decided on the following list of action for the agents:
 
 \begin{itemize}
-    \item \textbf{\texttt{NO\_OP:}} No action is taken for the current step.
-    \item \textbf{\texttt{HARVEST\_MINERALS:}} Order a random idle worker to gather minerals from the closes mineral deposit.
-    \item \textbf{\texttt{BUILD\_COMMAND\_CENTER:}} Order a random idle or harvesting worker to build a Command Center. The agent can only have up to three Command Centers.
-    \item \textbf{\texttt{RECRUIT\_SCV\_0:}} Recruit an SCV on the first Command Center.
-    \item \textbf{\texttt{RECRUIT\_SCV\_1:}} Recruit an SCV on the second Command Center.
-    \item \textbf{\texttt{RECRUIT\_SCV\_2:}} Recruit an SCV on the third Command Center.
-    \item \textbf{\texttt{BUILD\_SUPPLY\_DEPOT:}} Order a random idle or harvesting worker to build a Supply Depot. The agent can only have up to 24 Supply Depots.
-    \item \textbf{\texttt{BUILD\_BARRACKS:}} Order a random idle or harvesting worker to build a Barracks. The agent can only have up to four Barracks.
-    \item \textbf{\texttt{RECRUIT\_MARINE:}} Recruit a Marine on the Barracks with the shortest queue.
-    \item \textbf{\texttt{ATTACK\_CLOSEST\_BUILDING:}} Attack with all Marines to the enemy building that is closest to the average position of all Marines.
-    \item \textbf{\texttt{ATTACK\_CLOSEST\_WORKER:}} Attack with all Marines to the enemy worker that is closest to the average position of all Marines.
-    \item \textbf{\texttt{ATTACK\_CLOSEST\_ARMY:}} Attack with all Marines to the enemy combat unit that is closest to the average position of all Marines.
-    \item \textbf{\texttt{ATTACK\_BUILDINGS:}} Attack with all Marines to the enemy building that is closest to the average position of all enemy buildings.
-    \item \textbf{\texttt{ATTACK\_WORKERS:}} Attack with all Marines to the enemy worker that is closest to the average position of all enemy workers.
-    \item \textbf{\texttt{ATTACK\_ARMY:}} Attack with all Marines to the enemy combat unit that is closest to the average position of all enemy combat units.
+    \item \textbf{\texttt{NO\_OP}:} No action is taken for the current step.
+    \item \textbf{\texttt{HARVEST\_MINERALS}:} Order a random idle worker to gather minerals from the closes mineral deposit.
+    \item \textbf{\texttt{BUILD\_COMMAND\_CENTER}:} Order a random idle or harvesting worker to build a Command Center. The agent can only have up to three Command Centers.
+    \item \textbf{\texttt{RECRUIT\_SCV\_0}:} Recruit an SCV on the first Command Center.
+    \item \textbf{\texttt{RECRUIT\_SCV\_1}:} Recruit an SCV on the second Command Center.
+    \item \textbf{\texttt{RECRUIT\_SCV\_2}:} Recruit an SCV on the third Command Center.
+    \item \textbf{\texttt{BUILD\_SUPPLY\_DEPOT}:} Order a random idle or harvesting worker to build a Supply Depot. The agent can only have up to 24 Supply Depots.
+    \item \textbf{\texttt{BUILD\_BARRACKS}:} Order a random idle or harvesting worker to build a Barracks. The agent can only have up to four Barracks.
+    \item \textbf{\texttt{RECRUIT\_MARINE}:} Recruit a Marine on the Barracks with the shortest queue.
+    \item \textbf{\texttt{ATTACK\_CLOSEST\_BUILDING}:} Attack with all Marines to the enemy building that is closest to the average position of all Marines.
+    \item \textbf{\texttt{ATTACK\_CLOSEST\_WORKER}:} Attack with all Marines to the enemy worker that is closest to the average position of all Marines.
+    \item \textbf{\texttt{ATTACK\_CLOSEST\_ARMY}:} Attack with all Marines to the enemy combat unit that is closest to the average position of all Marines.
+    \item \textbf{\texttt{ATTACK\_BUILDINGS}:} Attack with all Marines to the enemy building that is closest to the average position of all enemy buildings.
+    \item \textbf{\texttt{ATTACK\_WORKERS}:} Attack with all Marines to the enemy worker that is closest to the average position of all enemy workers.
+    \item \textbf{\texttt{ATTACK\_ARMY}:} Attack with all Marines to the enemy combat unit that is closest to the average position of all enemy combat units.
 \end{itemize}
 
 For all building types, we have predefined all the position where they can be built for each map. The versus map we will use only supports up to two additional bases, which is why we limit the Command Centers to three (including the one each player starts with). The Supply Depots are limited to 24 since that is the amount that will bring the supply resource to its maximum of 200. Any Supply Depot beyond the 24\textsuperscript{th} will have no effect. The limit of four Barracks is somewhat arbitrary. Four is enough to build Marines at a sufficient speed to win the game.
@@ -153,60 +155,4 @@ We make no use of the visual information provided by the feature layers. This is
 
 \subsection{Reward signal}
 
-The reward signals we have chosen will vary depending on the map and its objective. They are explained in detail in section \ref{sec:mini-games}.
-
-\section{Custom scenarios}
-\label{sec:mini-games}
-
-We found that the mini-games distributed with PySC2 didn't fit with the needs and limitations of our different agents, which are explained in chapter \ref{chapter:implementation}. For that reason, we have used the StarCraft II map editor to create our own custom maps.
-
-\subsubsection*{\texttt{BuildMarinesRandom}}
-
-The objective of this mini-game is to recruit as many Marines as possible in a limited time-frame. The agent start with one Command Center and 16 SCVs next to a mineral patch. Additionally, to favour the exploration process, the scenario can randomly start with one Supply Depot already built, or one Supply Depot and one to four Barracks already built. The more advanced the starting base, the less likely it is.
-
-The map has a fixed duration of 10 minutes. The score for each step is the amount of minerals spent on recruiting Marines since the last step. The agent has to build Supply Depots, Barracks and Marines in the most optimal way possible to maximize the score.
-
-$$
-r(t) = \texttt{spending\_Marines}_{t} - \texttt{spending\_Marines}_{t-1}
-$$
-
-\subsubsection*{\texttt{BuildMarinesFixed}}
-
-This map is identical to \texttt{BuildMarinesRandom} except that it always start with only the Command Center and the SVCs. It is used for inference purposes.
-
-\subsubsection*{\texttt{CollectMineralsRandom}}
-
-The objective of this mini-game is to harvest as many minerals as possible in a limited time-frame. The agent start with one Command Center and 16 SCVs next to a mineral patch. The map includes two additional mineral patches to allow for up to two more bases to be built. Additionally, to favour the exploration process, the scenario can randomly start with one or two extra Command Centers already built. The more starting Command Centers, the less likely it is.
-
-The map has a fixed duration of 12 minutes. The score for each step is the amount of minerals gained or lost since the last step. The agent has to build SCVs, Supply Depots, and Command Centers in the most optimal way possible to maximize the score.
-
-$$
-r(t) = \texttt{minerals}_{t} - \texttt{minerals}_{t-1}
-$$
-
-\subsubsection*{\texttt{CollectMineralsFixed}}
-
-This map is identical to \texttt{CollectMineralsRandom} except that it always start with only one Command Center and the SVCs. It is used for inference purposes.
-
-\subsubsection*{\texttt{DefeatBases}}
-
-The objective of this mini-game is to defeat two small enemy bases. The agent starts with a group of Marines of variable size placed a random point close to the center of the map. The enemy bases consist of three Supply Depots, a small random number of SCVs and a small random number of Marines, randomly positioned on opposite corners of the map. The enemy Marines are programmed to attack any units that damage nearby buildings and the SCVs are programmed to repair nearby buildings. The number of ally and enemy Marines is set up so that the allies can destroy both bases reliably if played correctly.
-
-The map ends when all enemy buildings have been destroyed or after 3 minutes. The score for each step is the change in health score since the last step, with an additional flat penalty each step to encourage faster episodes. The agent has to prioritize targeting enemy Marines, then SCVs and then buildings, and to focus on a single base at a time to maximize the score.
-
-$$
-\texttt{health\_score} = \texttt{health\_allies} \cdot 1.1 - \texttt{health\_enemies}
-$$
-$$
-r(t) = \texttt{health\_score}_{t} - \texttt{health\_score}_{t-1} - \texttt{step\_cost}
-$$
-
-\subsubsection*{\texttt{Simple64}}
-
-This is the only custom map included in PySC2 that we used without any changes. It is a two-player map, classified as a \say{melee} map instead of a mini-game, meaning the objective is simply to defeat the enemy player. Each player starts, randomly, in one of two opposite corners of a symmetric battlefield with a Command Center and 12 SCVs next to a mineral patch. This emulates a real game of StarCraft II.
-
-The game ends when one of the player has been defeated (by losing all of their structures). It can also end in a draw if enough time passes with none of the players being able to gather more resources, produce more units or destroy enemy units. The score for each step is the change in a custom player score since the last step. The player score is calculated with the mineral value of all units of that player factored by the health or build progress of the unit.
-
-$$
-r(t) = (\texttt{ally\_score}_{t} - \texttt{enemy\_score}_{t}) - (\texttt{ally\_score}_{t-1} - \texttt{enemy\_score}_{t-1})
-$$
+The reward signals we have chosen will vary depending on the map and its objective. They are explained in detail in section \ref{sec:training}.
