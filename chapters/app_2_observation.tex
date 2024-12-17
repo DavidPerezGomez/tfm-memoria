@@ -25,11 +25,11 @@
     \item[\texttt{num\_completed\_command\_centers}] $\in \mathbb{N}^+$. Number of finished Command Centers the agent controls.
     \item[\texttt{max\_command\_centers}] $\in \mathbb{N}^+$. Maximum number of commands centers the agent can have at a time (as configured for the current map).
     \item[\texttt{pct\_command\_centers}] $\in [0,1]$ Number of Command Centers divided by maximum number of commands centers.
-    \item[\texttt{command\_center\_0\_order\_length}] $\in \{-1, \mathbb{N}^+\}$. Number of workers being build in first Command Center. -1 if the Command Center doesn't exist or isn't finished.
+    \item[\texttt{command\_center\_0\_order\_length}] $\in \{-1, \mathbb{N}^+\}$. Number of workers being build in first Command Center. $-1$ if the Command Center doesn't exist or isn't finished.
     \item[\texttt{command\_center\_0\_num\_workers}] $\in \mathbb{N}^+$. Number of workers harvesting minerals to first Command Center.
-    \item[\texttt{command\_center\_1\_order\_length}] $\in \{-1, \mathbb{N}^+\}$. Number of workers being build in second Command Center. -1 if the Command Center doesn't exist or isn't finished.
+    \item[\texttt{command\_center\_1\_order\_length}] $\in \{-1, \mathbb{N}^+\}$. Number of workers being build in second Command Center. $-1$ if the Command Center doesn't exist or isn't finished.
     \item[\texttt{command\_center\_1\_num\_workers}] $\in \mathbb{N}^+$. Number of workers harvesting minerals to second Command Center.
-    \item[\texttt{command\_center\_2\_order\_length}] $\in \{-1, \mathbb{N}^+\}$. Number of workers being build in third Command Center. -1 if the Command Center doesn't exist or isn't finished.
+    \item[\texttt{command\_center\_2\_order\_length}] $\in \{-1, \mathbb{N}^+\}$. Number of workers being build in third Command Center. $-1$ if the Command Center doesn't exist or isn't finished.
     \item[\texttt{command\_center\_2\_num\_workers}] $\in \mathbb{N}^+$. Number of workers harvesting minerals to third Command Center.
     \item[\texttt{num\_supply\_depots}] $\in \mathbb{N}^+$. Number of Supply Depots the agent controls (includes Supply Depots being build).
     \item[\texttt{num\_completed\_supply\_depots}] $\in \mathbb{N}^+$. Number of finished Supply Depots the agent controls.
@@ -39,8 +39,8 @@
     \item[\texttt{num\_completed\_barracks}] $\in \mathbb{N}^+$. Number of finished Barracks the agent controls.
     \item[\texttt{max\_barracks}] $\in \mathbb{N}^+$. Maximum number of Barracks the agent can have at a time (as configured for the current map).
     \item[\texttt{pct\_barracks}] $\in [0,1]$. Number of Barracks divided by maximum number of Barracks.
-    \item[\texttt{barracks\_used\_queue\_length}] $\in \{-1, \mathbb{N}^+\}$. Number of Marines being build in all Barracks. -1 if the agent controls no completed Barracks.
-    \item[\texttt{barracks\_free\_queue\_length}] $\in \{-1, \mathbb{N}^+\}$. Number of that can be queued to build in all Barracks. -1 if the agent controls no completed Barracks.
+    \item[\texttt{barracks\_used\_queue\_length}] $\in \{-1, \mathbb{N}^+\}$. Number of Marines being build in all Barracks. $-1$ if the agent controls no completed Barracks.
+    \item[\texttt{barracks\_free\_queue\_length}] $\in \{-1, \mathbb{N}^+\}$. Number of that can be queued to build in all Barracks. $-1$ if the agent controls no completed Barracks.
 \end{description}
 
 \subsubsection*{Relating to units}
@@ -54,12 +54,12 @@
     \item[\texttt{num\_idle\_marines}] $\in \mathbb{N}^+$. Number of Marines that are idle.
     \item[\texttt{pct\_idle\_marines}] $\in [0,1]$. Ratio of Marines that are idle.
     \item[\texttt{total\_army\_health}] $\in \mathbb{N}^+$. Total health of all Marines.
-    \item[\texttt{dist\_marine\_avg\_to\_army\_avg}] $\in \{-1, \mathbb{R}^+\}$. Distance from average position of all Marines to average position of all enemy Marines. -1 if there are no friendly Marines or enemy Marines.
-    \item[\texttt{dist\_marine\_avg\_to\_worker\_avg}] $\in \{-1, \mathbb{R}^+\}$. Distance from average position of all Marines to average position of all enemy workers. -1 if there are no friendly Marines or enemy workers.
-    \item[\texttt{dist\_marine\_avg\_to\_building\_avg}] $\in \{-1, \mathbb{R}^+\}$. Distance from average position of all Marines to average position of all enemy structures. -1 if there are no friendly Marines or enemy structures.
-    \item[\texttt{dist\_marine\_avg\_to\_closest\_army}] $\in \{-1, \mathbb{R}^+\}$. Shortest distance from average position of all Marines to any enemy Marine. -1 if there are no friendly Marines or enemy Marines.
-    \item[\texttt{dist\_marine\_avg\_to\_closest\_worker}] $\in \{-1, \mathbb{R}^+\}$. Shortest distance from average position of all Marines to any enemy worker. -1 if there are no friendly Marines or enemy workers.
-    \item[\texttt{dist\_marine\_avg\_to\_closest\_building}] $\in \{-1, \mathbb{R}^+\}$. Shortest distance from average position of all Marines to any enemy structure. -1 if there are no friendly Marines or enemy structures.
+    \item[\texttt{dist\_marine\_avg\_to\_army\_avg}] $\in \{-1, \mathbb{R}^+\}$. Distance from average position of all Marines to average position of all enemy Marines. $-1$ if there are no friendly Marines or enemy Marines.
+    \item[\texttt{dist\_marine\_avg\_to\_worker\_avg}] $\in \{-1, \mathbb{R}^+\}$. Distance from average position of all Marines to average position of all enemy workers. $-1$ if there are no friendly Marines or enemy workers.
+    \item[\texttt{dist\_marine\_avg\_to\_building\_avg}] $\in \{-1, \mathbb{R}^+\}$. Distance from average position of all Marines to average position of all enemy structures. $-1$ if there are no friendly Marines or enemy structures.
+    \item[\texttt{dist\_marine\_avg\_to\_closest\_army}] $\in \{-1, \mathbb{R}^+\}$. Shortest distance from average position of all Marines to any enemy Marine. $-1$ if there are no friendly Marines or enemy Marines.
+    \item[\texttt{dist\_marine\_avg\_to\_closest\_worker}] $\in \{-1, \mathbb{R}^+\}$. Shortest distance from average position of all Marines to any enemy worker. $-1$ if there are no friendly Marines or enemy workers.
+    \item[\texttt{dist\_marine\_avg\_to\_closest\_building}] $\in \{-1, \mathbb{R}^+\}$. Shortest distance from average position of all Marines to any enemy structure. $-1$ if there are no friendly Marines or enemy structures.
 \end{description}
 
 \subsubsection*{Relating to resources}
