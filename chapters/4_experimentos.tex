@@ -8,6 +8,7 @@ In this chapter we discuss the implementation details of the project, the traini
 As was mentioned in chapter \ref{chapter:introduction}, this project is a continuation of previous works by other students. As such, we have decided to use the existing codebase as a starting point. The entire code, as well as the custom mini-games and trained models, is available in our public GitHub repository\footnote{\url{https://github.com/DavidPerezGomez/tfm-rl-starcraft2}}.
 
 \subsection{Agent structure}
+\label{sec:agent_structure}
 
 Our agents implement the Deep Q-Learning algorithm described in section \ref{sec:dql}. They include two neural networks (main and target) to learn to estimate the value of state-action pairs, and a replay buffer to store previous experiences as training samples for the networks. They also implement the $\epsilon$-greedy method to favour exploration during the entire training process.
 
@@ -346,14 +347,14 @@ The first agent uses a medium network (the same size as the networks of all hier
     \begin{tabular}{ l|c r r r }
         & Performance & Energy (kW/h) & C. emissions (kg) & FPOs \\
         \hline \hline
-        Single agent M & $13$/$8$/$79$ ($13.00\%$) & $0.09202$ & $0.015547$ & $1.86\mathrm{e}18$ \\
-        Single agent L & $78$/$0$/$22$ ($78.00\%$) & $0.12199$ & $0.020814$ & $7.16\mathrm{e}20$ \\
-        Hierarchical agent & \textbf{$91$/$3$/$6$ ($91.00\%$)} & \textbf{$0.0889$} & \textbf{$0.0150$} & \textbf{$1.78\mathrm{e}18$} \\
+        Single agent M & $13$/$8$/$79$ ($13.00\%$) & $0.09202$ & $0.015547$ & $1.93\mathrm{e}12$ \\
+        Single agent L & $78$/$0$/$22$ ($78.00\%$) & $0.12199$ & $0.020814$ & $6.32\mathrm{e}12$ \\
+        Hierarchical agent & \textbf{$91$/$3$/$6$ ($91.00\%$)} & \textbf{$0.0889$} & \textbf{$0.0150$} & \textbf{$2.02\mathrm{e}12$} \\
         \hline
-        \quad Base manager & --- & $0.0207$ & $0.00349$ & $6.32\mathrm{e}17$ \\
-        \quad Recruit manager & --- & $0.0225$ & $0.00380$ & $6.32\mathrm{e}17$ \\
-        \quad Attack manager & --- & $0.00575$ & $0.000972$ & $2.16\mathrm{e}17$ \\
-        \quad Game manager & --- & $0.0401$ & $0.00677$ & $2.99\mathrm{e}17$ \\
+        \quad Base manager & --- & $0.0207$ & $0.00349$ & $6.61\mathrm{e}11$ \\
+        \quad Recruit manager & --- & $0.0225$ & $0.00380$ & $6.61\mathrm{e}11$ \\
+        \quad Attack manager & --- & $0.00575$ & $0.000972$ & $2.26\mathrm{e}11$ \\
+        \quad Game manager & --- & $0.0401$ & $0.00677$ & $4.71\mathrm{e}11$ \\
     \end{tabular}
     \caption{Results summary}
     \label{tab:results}
@@ -365,18 +366,18 @@ To measure the efficiency of the different agents during training, we have used 
 
 An alternative way to estimate the training cost of our models is to obtain the number of floating-point operations (FPOs) that are performed \cite{Schwartz:2019}. FPOs serve as an estimate of the work performed by a computational process, and using them as a measure has the advantage that it is independent of the hardware. While we can't obtain the exact number of FPOs performed during training, we can approximate them based on the size of the neural networks and the number of inferences and backpropagations executed.
 
-For a completely connected neural network like the ones we use, the number of weights is equal to the product of the number of inputs, outputs and neurons in each of the hidden layers. Our networks have 68 inputs and 15 outputs, except for the case of the hierarchical main agent, which has only 3 outputs. The resulting amounts of weights for each network size are listed in table \ref{tab:weights}.
+For a completely connected neural network like the ones we use, the number of weights of each layer is equal to the product of the number of neurons in the layer and the number of neurons in the next layer. Our networks have 68 inputs and 15 outputs, except for the case of the hierarchical main agent, which has only 3 outputs, and the number of hidden layers and nodes depends based on the sizes described in section \ref{sec:agent_structure}. The resulting amounts of weights for each network size are listed in table \ref{tab:weights}.
 
 \begin{table}[h]
     \centering
     \begin{tabular}{ l|r r }
         Network size & Weights & Weights (game manager) \\
         \hline
-        Medium & $34225520640$ & $6845104128$ \\
+        Medium & $35808$ & $35424$ \\
         \hline
-        Large & $8761733283840$ & $1752346656768$ \\
+        Large & $77280$ & $76896$ \\
         \hline
-        Extra large & $4486007441326080$ & $897201488265216$ \\
+        Extra large & $225760$ & $225376$ \\
     \end{tabular}
     \caption{Number of weights of the neural networks}
     \label{tab:weights}
@@ -390,4 +391,4 @@ Following the DQN algorithm (algorithm \ref{alg:dqn2}), we can calculate the num
 
 Where $W$ is the number of weights in the network, $S$ is the number of steps taken during training and $J$ is the learning batch size, which in our case is 512 for all agents.
 
-After calculating the FPOs for each agent we see that training the single large agent involves 400 times more floating-point operations than the entire group of hierarchical agents.
+After calculating the FPOs for each agent we see that training the single large agent involves 3 times more floating-point operations than the entire group of hierarchical agents.
