@@ -287,17 +287,17 @@ The training of the hierarchical agent is divided in two steps: fine-tuning of t
 
 \subsubsection*{Fine-tuning sub-agents}
 
-In this phase, the main agent and the sub-agents run in combination (with the main agent deciding which sub-agent selects the next actions) for a small number of episodes, with all of them being trained. The goal of this to adjust the sub-agents to the new environment, which is different from the ones each of them have been trained on. Each of the sub-agents receives the same reward signal the did during training.
+In this phase, the main agent and the sub-agents run in combination (with the main agent deciding which sub-agent selects the next actions) for a small number of episodes, with all of them being trained. The goal of this is to adjust the sub-agents to the new environment, which is different from the ones each of them have been trained on. Each of the sub-agents receives the same reward signal the did during training.
 
 One problem with this process is that since each sub-agent is only acting about a third of the time, it doesn't experience the states when it isn't acting. This can cause blind spots in an agent's experience that break the chain of states that allow Q-Learning to work. Similarly, the use of delayed and long-term rewards can cause the reward to be received when the sub-agent responsible isn't active, missing it entirely.
 
 To mitigate these issues, we have taken two measures. First, we have avoided as much as possible the use of delayed rewards while training the sub-agents, especially in the case of the recruit manager and the base manager. Second, since all the reward signals are based on comparing a score on the current step with the score of the previous step, for the case of sub-agents, we compare the current score with the score of the last step in which the agent took an action. This means that even if the agent isn't selected to act for several steps, the next time it is selected it will see the change in score from its last action.
 
-The sub-agents have been fine-tuned for 7442 steps combined (20 episodes). At the same time, the main agent uses a medium neural network and has been trained for 1496 steps (20 episodes).
+The sub-agents have been fine-tuned for 7442 steps combined (20 episodes). At the same time, the main agent, which uses a medium neural network, has been trained for 1496 steps (20 episodes).
 
 \subsubsection*{Training main agent}
 
-After the fine-tuning process, the sub-agent are frozen and the main agent continues training. The main agent has been trained this way for 3945 additional steps (40 episodes). Figure \ref{fig:hierarchical_Simple64_scores} shows the scores obtained by the trained agent during exploitation compared to the ones obtained by a random agent.
+After the fine-tuning process, the sub-agents are frozen and the main agent continues training. The main agent has been trained this way for 3945 additional steps (40 episodes). Figure \ref{fig:hierarchical_Simple64_scores} shows the scores obtained by the trained agent during exploitation compared to the ones obtained by a random agent.
 
 \begin{figure}[t]
     \centering
@@ -316,9 +316,9 @@ After the fine-tuning process, the sub-agent are frozen and the main agent conti
 
 \subsection{Single agent}
 
-Finally, for the single RL agent that is to be used as the control for the performance and efficiency of the hierarchical agent we have trained two agents. The first agent is meant to be as good as possible while being limited to the same training cost as the hierarchical agent, and, conversely, the second is meant to match the performance of the hierarchical agent regardless of the training efficiency. Both agents haven been trained with the same environment and reward signal as the hierarchical agent.
+Finally, we have trained two instances of a RL agent to be used as the control for the performance and efficiency of the hierarchical agent. The first agent is meant to be as good as possible while being limited to the same training cost as the hierarchical agent. Conversely, the second is meant to match the performance of the hierarchical agent regardless of the training efficiency. Both agents haven been trained with the same environment and reward signal as the hierarchical agent.
 
-The first agent uses a medium network (the same size as the networks of all hierarchical sub-agents) and has been trained for 52572 steps (130 episodes). For the second agent, we needed to upgrade to a large network to come close to the same performance. It has been trained for 79768 steps (200 episodes). Figure \ref{fig:hierarchical_Simple64_scores} shows the scores obtained by both agents during exploitation compared to the ones obtained by a random agent.
+The first agent uses a medium network (the same size as the networks of all hierarchical sub-agents) and has been trained for 52572 steps (130 episodes). For the second agent, we needed to upgrade to a large network to come close to the same performance as the hierarchical agent. It has been trained for 79768 steps (200 episodes). Figure \ref{fig:hierarchical_Simple64_scores} shows the scores obtained by both agents during exploitation compared to the ones obtained by a random agent.
 
 \begin{figure}[t]
     \centering
