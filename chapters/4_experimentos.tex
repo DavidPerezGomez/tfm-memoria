@@ -86,7 +86,7 @@ Our Hierarchical model consists of four different agents: one high-level manager
 
 Action masking is not applied to these action.
 
-The main agent will also implement a temporal extension of five steps, meaning that it will act only every five actions (160 game ticks, 10 in-game seconds), as explained in \ref{sec:hrl}.
+The main agent will also implement a temporal extension of five steps, meaning that it will act only every five steps (160 game ticks, 10 in-game seconds), as explained in \ref{sec:hrl}.
 
 \subsubsection*{Attack manager sub-agent}
 
@@ -120,7 +120,7 @@ The recruit manager sub-agent is in charge of training the Marine army by creati
 \end{itemize}
 \end{multicols}
 
-Since performing an action to build structures while there are no idle workers will cause a harvesting worker to stop gathering material, the agent has the ability to send workers back to harvesting, so as to not cripple the resource economy by accident, specially when working by itself during training.
+Since performing an action to build structures while there are no idle workers will cause a harvesting worker to stop gathering minerals, the agent has the ability to send workers back to harvesting, so as to not cripple the resource economy by accident, specially when working by itself during training.
 
 \subsubsection*{Base manager sub-agent}
 
@@ -138,12 +138,12 @@ The base manager sub-agent is in charge of developing the resource economy by cr
 \end{itemize}
 \end{multicols}
 
-It has the ability to build Supply Depots because the amount of workers is also limited by the supply resource. Although each Command Center provides some supply, it si not enough to reach the optimal worker amount, and some Supply Depots are necessary at some point.
+It has the ability to build Supply Depots because the amount of workers is also limited by the supply resource. Although each Command Center provides some supply, it is not enough to reach the optimal worker amount, and some Supply Depots are necessary at some point.
 
 \section{Training}
 \label{sec:training}
 
-Training the RL agents proved to be more challenging than expected. We have gone through many revision of the training mini-games and reward signals for each for the sub-agents, main hierarchical agent and single agent. In general, the agents had trouble converging, often finding a good solution part way through the training, only to then collapse and spiral toward considerably worse policies as the training continued. We had to make use of frequent checkpoints to get versions of the agents with effective policies. The increasing values for the training loss that can be seen in appendix \ref{app:stats} suggest that the frequency at which we synchronize the target network with the main network may be too low, but we were unable to explore further due to time limitations.
+Training the RL agents proved to be more challenging than expected. We have gone through many revision of the training mini-games and reward signals for each for the sub-agents, main hierarchical agent and single agent. In general, the agents had trouble converging, often finding a good solution part way through the training, only to then collapse and spiral toward considerably worse policies as the training continued. We had to make use of frequent checkpoints to get versions of the agents with effective policies. The increasing values for the training loss that can be seen in appendix \ref{app:stats} suggest that the frequency at which we synchronize the target network with the main network may be too high, but we were unable to explore further due to time limitations.
 
 \begin{figure}[t]
     \centering
@@ -218,7 +218,7 @@ $$
 
 We also experimented penalizing the agent for spending minerals on anything other than Marines, even Supply Depots and Barracks which are necessary to begin training Marines. Our hope was that that would lead to more optimal and less wasteful strategies. While that may still be true, that reward signal caused even more instability during training and exacerbate the convergence difficulties mentioned previously. For that reason, and time limitations, we simplified the reward to the one described above.
 
-While training this sub-agent we noticed that the exploration process was constantly falling into the same patterns. Since Supply Depots are cheaper to build that Barracks and impossible actions are masked, it means that while the agent has enough minerals to build a Supply Depot but not enough to build a Barracks, the only actions it can take are either \texttt{NO\_OP}, or \texttt{BUILD\_SUPPLY\_DEPOT}. The random actions during exploration almost guarantee that the agent would build the Supply Depot before amassing enough minerals to build a Barracks, restarting the process, and only getting to build Barracks once no more Supply Depots could be built. While it wasn't impossible for the agent to randomly a Barracks before all 24 available Supply Depots, it was infrequent, and building two, three or four Barracks, even more so.
+While training this sub-agent we noticed that the exploration process was constantly falling into the same patterns. Since Supply Depots are cheaper to build that Barracks and impossible actions are masked, it means that while the agent has enough minerals to build a Supply Depot but not enough to build a Barracks, the only actions it can take are either \texttt{NO\_OP}, or \texttt{BUILD\_SUPPLY\_DEPOT}. The random actions during exploration almost guarantee that the agent would build the Supply Depot before amassing enough minerals to build a Barracks, restarting the process, and only getting to build Barracks once no more Supply Depots could be built. While it wasn't impossible for the agent to randomly build a Barracks before all 24 available Supply Depots, it was infrequent, and building two, three or four Barracks, even more so.
 
 Since the reward signal is never negative, it cannot \say{disuade} the agent from taking certain actions. Because of that, the agent relies heavily on exploration to discover which course of action provides a greater benefit. To favour the exploration process, we have created a second mini-game, \texttt{BuildMarinesRandom} (figure \ref{fig:BuildMarinesRandom}). This map is identical to \texttt{BuildMarinesFixed} except that the scenario can randomly start with one Supply Depot already built, or one Supply Depot and one to four Barracks already built. The more advanced the starting base, the less likely it is. This way, we present the agent with different situations to explore.
 
