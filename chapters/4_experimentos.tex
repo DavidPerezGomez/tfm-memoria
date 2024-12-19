@@ -386,7 +386,7 @@ To measure the efficiency of the different agents during training, we have used 
 
 An alternative way to estimate the training cost of our models is to obtain the number of floating-point operations (FPOs) that are performed \cite{Schwartz:2019}. FPOs serve as an estimate of the work performed by a computational process, and using them as a measure has the advantage that it is independent of the hardware. While we can't obtain the exact number of FPOs performed during training, we can approximate them based on the size of the neural networks and the number of inferences and backpropagations executed.
 
-For a completely connected neural network like the ones we use, the number of weights of each layer is equal to the product of the number of neurons in the layer and the number of neurons in the next layer. Our networks have 68 inputs and 15 outputs, except for the case of the hierarchical main agent, which has only 3 outputs, and the number of hidden layers and nodes depends based on the sizes described in section \ref{sec:agent_structure}. The resulting amounts of weights for each network size are listed in table \ref{tab:weights}.
+For a completely connected neural network like the ones we use, the number of weights of each layer is equal to the product of the number of neurons in the layer and the number of neurons in the next layer. Our networks have 68 inputs and 15 outputs, except for the case of the hierarchical main agent, which has only 3 outputs, and the number of hidden layers and nodes depends on the sizes described in section \ref{sec:agent_structure}. The resulting amounts of weights for each network size are listed in table \ref{tab:weights}.
 
 \begin{table}[h]
     \centering
