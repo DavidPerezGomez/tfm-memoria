@@ -5,7 +5,7 @@ In this chapter, we describe de characteristics of StarCraft II as a reinforceme
 
 \section{StarCraft II}
 
-StarCraft II is a real-time strategy video-game developed by Blizzard Entertainment, Inc. in 2010. The game was extremely successful with the casual audience and it spawned a professional competition scene that continues to this day. In the field of machine learning, StarCraft II was first explored in 2017 \cite{Vinyals:2017} and it has since become a frequently tackled game thanks to its complexity and the wide range of challenges that it provides \cite{Tang:2018}.
+StarCraft II is a real-time strategy video-game developed by Blizzard Entertainment, Inc. and published by the same company in 2010. The game was extremely successful with the casual audience and it spawned a professional competition scene that continues to this day. In the field of machine learning, StarCraft II was first explored in 2017 \cite{Vinyals:2017} and it has since become a frequently tackled game thanks to its complexity and the wide range of challenges that it provides \cite{Tang:2018}.
 
 StarCraft II is played on a mostly flat map with an isometric or birds-eye view. The main game-mode is versus, in which two or more players fight against each other until all but one of the players (or teams) are defeated. Each player needs to collect resources from the map, build structures and recruit and upgrade their army to attack other players and defend themselves. A player is defeated when all their structures have been destroyed. There are three playable races for the players to choose (Terran, Protoss and Zerg), each with their own unique units, structures, upgrade trees and game mechanics.
 
@@ -67,7 +67,7 @@ The second type of function, called \say{raw function}, encodes higher level act
 \subsubsection*{Reward signal}
 \label{sec:reward_signal}
 
-For each observation in a standard versus map, PySC2 provides two different rewards. One simply reflects the win or lose status at the end of a game: 1 for victory, -1 for defeat and 0 for draw (in case of a time-out). Every step during the game before the end of the match has a reward of 0. While this reward matches the desired behavior of the agents (we simply care about winning and not losing) it can be too sparse for the agents to properly learn, since the only receive one instance of reward after every game, which can easily take hundreds or thousands of steps.
+For each observation in a standard versus map, PySC2 provides two different rewards. One simply reflects the win or lose status at the end of a game: $1$ for victory, $-1$ for defeat and $0$ for draw (in case of a time-out). Every step during the game before the end of the match has a reward of $0$. While this reward matches the desired behavior of the agents (we simply care about winning and not losing) it can be too sparse for the agents to properly learn, since the only receive one instance of reward after every game, which can easily take hundreds or thousands of steps.
 
 For that reason, a second, dense reward is also included. This reward matches the internal score that the game assigns to each player. This score is calculated based on the amount of resources collected, upgrades researched, and unit and structures built. It is not a perfect metric to determine victory, but it serves as a decent estimator for which player is in a better position.
 
@@ -88,7 +88,7 @@ Similarly, we have also decided to have the agents work with only a fraction of 
 Taking this into account, we have chosen the Terrans as the race to focus on since it can be considered the most simple and straight-forward of the three, and the one that functions best with a limited progression. The agents will have access to the following units and structures:
 
 \begin{itemize}
-    \item \textbf{Command Center:} Town hall for the Terran Race. It can recruit SCVs and is necessary to collect minerals and vespene. Every player begins the game with one Command Center next to a patch of mineral crystals. Costs 400 minerals and takes 71 seconds to build.
+    \item \textbf{Command Center:} Town hall for the Terran race. It can recruit SCVs and is necessary to collect minerals and vespene. Every player begins the game with one Command Center next to a patch of mineral crystals. Costs 400 minerals and takes 71 seconds to build.
     \item \textbf{SCV:} Worker unit used to build all Terran structures and to collect minerals and vespene and take them to the closest Command Center. It has limited combat abilities, but we won't make use of them for the sake of simplicity. Every player begins the game with 12 SCVs. Costs 50 minerals and 1 supply, and takes 12 seconds to train.
     \item \textbf{Supply Depot:} Structure that increases the maximum supply of the player, which determines the amount of units the player can have at the same time. At least one Supply Depot is required to build a Barracks. Costs 100 minerals and takes 21 seconds to build.
     \item \textbf{Barracks:} Structure used to recruit new Marines. Costs 150 minerals and takes 46 seconds to build.
