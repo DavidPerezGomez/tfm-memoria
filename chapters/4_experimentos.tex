@@ -76,7 +76,24 @@ Lastly, we found that the mini-games distributed with PySC2 didn't fit with the 
 
 \subsection{Hierarchical model}
 
-Our Hierarchical model consists of four different agents: one high-level manager and three lower-level sub-agents. The main agent, also called game manager, is tasked with selecting which of the sub-agents will decide the next several actions. For that purpose, instead of the set of actions described in section \ref{sec:action_space}, it works with a different, exclusive list of actions:
+\begin{figure}[t]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=1\textwidth]{figs/multi_agent_schema.png}
+        \caption{Hierarchical agent schema}
+        \label{fig:multi_schema}
+    \end{subfigure}
+    \hspace{1cm}
+    \begin{subfigure}[b]{0.25\textwidth}
+        \includegraphics[width=1\textwidth]{figs/single_agent_schema.png}
+        \caption{Single agent schema}
+        \label{fig:single_schema}
+    \end{subfigure}
+    \hfill
+    \caption{Agents' structure}
+\end{figure}
+
+Our Hierarchical model consists of four different agents: one high-level manager and three lower-level sub-agents, as depicted in figure \ref{fig:multi_schema}. The main agent, also called game manager, is tasked with selecting which of the sub-agents will decide the next several actions. For that purpose, instead of the set of actions described in section \ref{sec:action_space}, it works with a different, exclusive list of actions:
 
 \begin{itemize}
     \item \textbf{\texttt{EXPAND\_BASE}:} Delegate the action selection to the base manager sub-agent.
