@@ -143,7 +143,7 @@ It has the ability to build Supply Depots because the amount of workers is also 
 \section{Training}
 \label{sec:training}
 
-Training the RL agents proved to be more challenging than expected. We have gone through many revision of the training mini-games and reward signals for each for the sub-agents, main hierarchical agent and single agent. In general, the agents had trouble converging, often finding a good solution part way through the training, only to then collapse and spiral toward considerably worse policies as the training continued. We had to make use of frequent checkpoints to get versions of the agents with effective policies. The increasing values for the training loss that can be seen in appendix \ref{app:stats} suggest that the frequency at which we synchronize the target network with the main network may be too high, but we were unable to explore further due to time limitations.
+Training the RL agents proved to be more challenging than expected. We have gone through many revision of the training mini-games and reward signals for each for the sub-agents, main hierarchical agent and single agent. In general, the agents had trouble converging, often finding a good solution part way through the training, only to then collapse and spiral toward considerably worse policies as the training continued. We had to make use of frequent checkpoints to get versions of the agents with effective policies. The increasing values for the training loss that can be seen in appendix \ref{app:stats} suggest that the frequency at which we synchronize the target network with the main network may be too high, but we were unable to test more configurations due to time limitations.
 
 \begin{figure}[t]
     \centering
