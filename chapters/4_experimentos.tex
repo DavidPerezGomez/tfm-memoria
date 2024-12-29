@@ -68,7 +68,7 @@ It should be noted that whenever we make use of random agents (be it as baseline
 
 In section \ref{sec:pysc2} we explained how PySC2 allows us to configure how often the agent will be able to act on the environment. Setting the action frequency too low can obviously lead to poor performance, since the agent would be too slow to react to events taking place in the game. Setting it too high, however, can present its own set of challenges. For one, it amplifies the sparse and long-term reward issues present in the environment: the more observations and actions the agent takes, the more \say{perceived} time it will take for long-term investments to pay off. Second, StarCraft II is a relatively slow paced game, where situations don't change drastically in an instant. Two observations taken in a very short time will be almost identical in most situations, slowing down the training process.
 
-In the end, we have settled on acting every 32 game ticks (2 in-game seconds), which we think strikes a decent balance.
+In the end, we have settled on acting every 32 game ticks (two in-game seconds). While this is quite slow when compared to human players (who can easily perform several actions per second), our goal, once again, is not to match human-level proficiency. We consider that one action every two in-game seconds strikes a decent balance of distancing the observations enough to have notable differences while not being so slow that the agent can't react in time to changing situations.
 
 \subsubsection*{Custom scenarios}
 
@@ -101,9 +101,9 @@ Our Hierarchical model consists of four different agents: one high-level manager
     \item \textbf{\texttt{ATTACK}:} Delegate the action selection to the attack manager sub-agent.
 \end{itemize}
 
-Action masking is not applied to these action.
+Action masking is not applied to these actions.
 
-The main agent will also implement a temporal extension of five steps, meaning that it will act only every five steps (160 game ticks, 10 in-game seconds), as explained in \ref{sec:hrl}.
+The main agent also implements a temporal extension of five steps, as explained in \ref{sec:hrl}, meaning that it acts only every five steps (160 game ticks, 10 in-game seconds). The sub-agent selected by the main agent, then, decides the actions to perform on the environment until the main agent acts again and selects a new (or the same) sub-agent. We have chosen the temporal extension to be five steps because we think that is long enough to reap the benefits of the technique while allowing the hierarchical agent to remain flexible, and not be \say{stuck} on a single course of action for too long. Due to time limitation we haven't been able to meaningfully experiment with other values.
 
 \subsubsection*{Attack manager sub-agent}
 
