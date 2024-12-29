@@ -330,7 +330,7 @@ After the fine-tuning process, the sub-agents are frozen and the main agent cont
     \label{fig:hierarchical_Simple64_scores}
 \end{figure}
 
-\subsection{Single agent}
+\subsection{Single agents}
 
 Finally, we have trained two instances of a RL agent to be used as the control for the performance and efficiency of the hierarchical agent. The first agent is meant to be as good as possible while being limited to the same training cost as the hierarchical agent. Conversely, the second is meant to match the performance of the hierarchical agent regardless of the training efficiency. Both agents haven been trained with the same environment and reward signal as the hierarchical agent.
 
@@ -425,4 +425,4 @@ Following the DQN algorithm (algorithm \ref{alg:dqn2}), we can estimate the numb
 
 Where $W$ is the number of weights in the network, $S$ is the number of steps taken during training and $J$ is the learning batch size, which in our case is 512 for all agents.
 
-After calculating the FPOs for each agent we see that training the single large agent involves three times more floating-point operations than the hierarchical agent.
+After calculating the FPOs for each agent we can see that the hierarchical agent greatly outclasses both single agents used as reference points. The medium agent was limited to the same training cost in order to compare the performance, and it clearly wasn't able to solve the environment while the hierarchical agent was. The large agent wasn't limited in order to compare the efficiency, and, although it was able to learn a reliable policy, it is still worse than the hierarchical agent while taking triple the amount of FPOs to train.
