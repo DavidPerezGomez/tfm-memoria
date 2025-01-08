@@ -14,7 +14,9 @@ Our agents implement the Deep Q-Learning algorithm described in section \ref{sec
 
 \subsubsection*{Networks}
 
-The neural networks, including optimizer and scheduler, are implemented using PyTorch. They are fully connected multilayer perceptrons. Since the size and shape of neural networks can have a large impact on their performance and ability to learn, we have defined three increasingly complex configurations for the hidden layers to use throughout the project:
+The neural networks, including optimizer and scheduler, are implemented using PyTorch. They are fully connected multilayer perceptrons. The inputs of the networks are the observations described in section \ref{sec:obs} and detailed in appendix \ref{app:observation}. The outputs are the expected return (q-values) for each of the actions available to the agent.
+
+Since the size and shape of neural networks can have a large impact on their performance and ability to learn, we have defined three increasingly complex configurations for the hidden layers to use throughout the project:
 
 \begin{itemize}
     \item \textbf{Medium:} Has four hidden layers with 128, 128, 64 and 32 neurons respectively.
